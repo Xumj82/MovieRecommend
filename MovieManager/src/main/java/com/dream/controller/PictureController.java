@@ -49,7 +49,7 @@ public class PictureController {
 			e.printStackTrace();
 			Map result = new HashMap<>();
 			result.put("error", 0);
-			result.put("url", "图片上传失败");
+			result.put("url", "Upload iamge failed");
 			return JsonUtils.objectToJson(result);
 		}
 	}

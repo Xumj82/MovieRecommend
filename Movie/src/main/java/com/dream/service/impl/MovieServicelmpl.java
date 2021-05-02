@@ -25,7 +25,7 @@ public class MovieServicelmpl implements MovieService {
     public E3Result SelectTopDefaultMovie(int limit) {
         List<Movie> list = moivemapper.SelectTopDefaultMovie(limit);;
         if (list == null || list.size() == 0) {
-            return E3Result.build(400, "获取电影信息错误");
+            return E3Result.build(400, "Get movie info error");
         }
         return E3Result.ok(list);
 

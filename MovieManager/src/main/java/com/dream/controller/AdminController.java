@@ -60,12 +60,12 @@ public class AdminController {
             subject.login(token);
         } catch (UnknownAccountException e) {
             e.printStackTrace();
-            model.addAttribute("userName", "用户名错误！");
-            return E3Result.build(500, "用户名错误");
+            model.addAttribute("userName", "Wrong username！");
+            return E3Result.build(500, "Wrong username");
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();
-            model.addAttribute("passwd", "密码错误");
-            return E3Result.build(500, "密码错误" );
+            model.addAttribute("passwd", "Wrong password");
+            return E3Result.build(500, "Wrong password" );
         }
         return E3Result.ok();
     }

@@ -55,9 +55,9 @@ public class NavigationTag extends TagSupport {
             if (page.getPage() > 1) {
                 String preUrl = append(url, "page", page.getPage() - 1);
                 preUrl = append(preUrl, "rows", page.getSize());
-                writer.print("<li><a href=\"" + preUrl + "\">上一页</a></li>");
+                writer.print("<li><a href=\"" + preUrl + "\">last page</a></li>");
             } else {
-                writer.print("<li class=\"disabled\"><a href=\"#\">上一页</a></li>");
+                writer.print("<li class=\"disabled\"><a href=\"#\">last page</a></li>");
             }
             //显示当前页码的前2页码和后两页码
             //若1 则 1 2 3 4 5, 若2 则 1 2 3 4 5, 若3 则1 2 3 4 5,
@@ -76,9 +76,9 @@ public class NavigationTag extends TagSupport {
             if (page.getPage() < pageCount) {
                 String nextUrl  = append(url, "page", page.getPage() + 1);
                 nextUrl = append(nextUrl, "rows", page.getSize());
-                writer.print("<li><a href=\"" + nextUrl + "\">下一页</a></li>");
+                writer.print("<li><a href=\"" + nextUrl + "\">next page</a></li>");
             } else {
-                writer.print("<li class=\"disabled\"><a href=\"#\">下一页</a></li>");
+                writer.print("<li class=\"disabled\"><a href=\"#\">next page</a></li>");
             }
             writer.print("</nav>");
         } catch (IOException e) {

@@ -315,11 +315,11 @@ public class IndexController {
     public E3Result selectMoviesByName(HttpServletRequest request){
         String moviename = request.getParameter("search_text");
         if(moviename == null || moviename ==""){
-            System.out.print("不能为空");
+            System.out.print("can not input null");
             return null;
         }
         else{
-            System.out.print("搜索内容"+moviename);
+            System.out.print("search movie"+moviename);
             List<Movie> list = movieService.selectMoviesByName(moviename);
 
             E3Result e3Result = E3Result.ok(list);

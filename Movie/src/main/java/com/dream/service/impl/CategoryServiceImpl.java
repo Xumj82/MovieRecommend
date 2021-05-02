@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService{
         // 执行查询
         List<Category> list = CategoryMapper.selectByExample(example);
         if (list == null || list.size() == 0) {
-            return E3Result.build(400, "获取分类标签错误");
+            return E3Result.build(400, "Get classification label error");
         }
         return E3Result.ok(list);
 

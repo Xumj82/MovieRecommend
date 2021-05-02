@@ -85,7 +85,7 @@ public class CustomerController {
     public String  selectedMovie(String ids ,HttpServletRequest request){
         //没有选择电影则不插入数据
         if(ids== "" || ids==null){
-            System.out.print("为空");
+            System.out.print("is null");
             return  "fail";
         }
         else {

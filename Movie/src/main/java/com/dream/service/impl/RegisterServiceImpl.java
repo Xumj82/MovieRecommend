@@ -41,7 +41,7 @@ public class RegisterServiceImpl implements RegisterService {
             criteria.andEmailEqualTo(param);
         }
         else{
-            return E3Result.build(400, "数据类型错误");
+            return E3Result.build(400, "Data type error");
         }
         // 执行查询
         List<User> list = userMapper.selectByExample(example);
@@ -58,7 +58,7 @@ public class RegisterServiceImpl implements RegisterService {
     public E3Result register(User user) {
         // 数据有效性校验
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())|| StringUtils.isBlank(user.getEmail())) {
-            return E3Result.build(400, "用户数据不完整，注册失败");
+            return E3Result.build(400, "User data is incomplete, registration failed");
         }
         // 补全pojo的属性
         user.setRegistertime(new Date());
@@ -92,7 +92,7 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         else{
-            return E3Result.build(400, "数据类型错误");
+            return E3Result.build(400, "Data type error");
         }
         // 执行查询
         List<User> listName = userMapper.selectByExample(exampleName);

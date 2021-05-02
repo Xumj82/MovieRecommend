@@ -46,7 +46,7 @@ public class MovieRealm extends AuthorizingRealm{
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        System.out.println("----执行了认证方法----");
+        System.out.println("----Excute Euthentication Method----");
         UsernamePasswordToken mytoken = (UsernamePasswordToken) authenticationToken;
         String adminName = mytoken.getUsername();
         // 根据用户名查询数据库
