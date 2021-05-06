@@ -6,11 +6,10 @@
 <html lang="zh-cmn-Hans" class="ua-mac ua-webkit">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>梦的6次方</title>
 
     <link rel="SHORTCUT ICON" href="./assets/img/knowU.ico"/>
 
-    <!-- 星星评分CSS-->
+    <!-- 星星RatingCSS-->
     <link href="./assets/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
     <!-- 整体DIV CSS-->
     <link href="./assets/css/bootstrap.css" rel="stylesheet">
@@ -47,27 +46,27 @@
 
 <!-- 导航栏-->
 <nav class="navbar navbar-default" role="navigation" style="background-color: black;margin-bottom: 0%">
-    <a class="navbar-brand" href="/" style="color: white">懂你<img src="./assets/img/title.gif">电影</a>
+    <a class="navbar-brand" href="./" style="color: white">Home</a>
 
     <div class="col-xs-4">
         <input id="inp-query" class="form-control"
                style="margin-bottom: 8px;margin-top: 8px;border-radius: 5px;border-color: white" name="search_text"
-               maxlength="60" placeholder="搜索电影" value="">
+               maxlength="60" placeholder="Search.." value="">
     </div>
-    <a class="navbar-brand" href="/index" style="color: white">选电影</a>
+    <a class="navbar-brand" href="./index" style="color: white">Select</a>
     <c:if test="${sessionScope.user == null}">
-        <a class="dream" href="javascript:window.location.href='/page/register'" id="register"
+        <a class="dream" href="javascript:window.location.href='./page/register'" id="register"
            style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                style="color: white" class="glyphicon glyphicon-user"></span> 注册</a>
-        <a class="dream" href="javascript:window.location.href='/page/login'"
+                style="color: white" class="glyphicon glyphicon-user"></span> Sign up</a>
+        <a class="dream" href="javascript:window.location.href='./page/login'"
            style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                style="color: white" class="glyphicon glyphicon-log-in"></span> 登录</a>
+                style="color: white" class="glyphicon glyphicon-log-in"></span> Sign in</a>
     </c:if>
     <c:if test="${sessionScope.user != null}">
 
-        <a class="dream" id="logout" href="javascript:window.location.href='/page/logout'"
+        <a class="dream" id="logout" href="javascript:window.location.href='./page/logout'"
            style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                style="color: white" class="glyphicon glyphicon-log-in"></span> 退出</a>
+                style="color: white" class="glyphicon glyphicon-log-in"></span> Logout</a>
         <a class="dream" id="profilelink"
            style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
                 style="color: white" class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a>
@@ -89,9 +88,9 @@
     <!--bt-->
     <div class="container">
 
-        <!--电影海报上面 电影名称和导演 -->
+        <!--电影海报上面 Title和Director -->
         <div class="row">
-            <!--电影名称导演 -->
+            <!--TitleDirector -->
             <div class="col-md-9 col-sm-8">
                 <h1>${sessionScope.moviedescription.moviename}</h1>
                 <h2>Directed by ${sessionScope.moviedescription.director}</h2>
@@ -103,14 +102,14 @@
             <div class="col-sm-4">
                 <div class="row">
 
-                    <!--最左侧电影图片和星星评分控件 -->
+                    <!--最左侧电影图片和星星Rating控件 -->
                     <div class="col-md-7 col-sm-12">
                         <div class="movie-poster">
 
                             <!--电影图片 -->
                             <a><img src="${sessionScope.moviedescription.picture}" alt="" style="width: 100%"></a>
 
-                            <!--评分控件，如果用户登录且未评分显示 -->
+                            <!--Rating控件，如果用户登录且未Rating显示 -->
                             <c:if test="${sessionScope.user != null&&sessionScope.userstar==null}">
                                 <div id="evalutiondiv">
                                     <input id="Evaluation">
@@ -124,25 +123,25 @@
                     <div class="col-md-5 col-sm-12 film-stats" style="">
 
                         <!--电影信息div -->
-                        <div><b style="font-size: 11pt">语言:</b><span
-                                style="font-size: 9pt"> 英语</span></div>
-                        <div><b style="font-size: 11pt">类别:</b><span
+                        <div><b style="font-size: 11pt">Language:</b><span
+                                style="font-size: 9pt"> English</span></div>
+                        <div><b style="font-size: 11pt">Category:</b><span
                                 style="font-size: 9pt"> ${sessionScope.moviedescription.typelist}</span></div>
-                        <div><b style="font-size: 11pt">上映日期:</b><span style="font-size: 9pt">
+                        <div><b style="font-size: 11pt">Date:</b><span style="font-size: 9pt">
                                         <fmt:formatDate value="${sessionScope.moviedescription.showyear}"
                                                         pattern="yyyy-MM-dd"/>
                                     </span></div>
-                        <div><b style="font-size: 11pt">多少人看过:</b> <span
+                        <div><b style="font-size: 11pt">Watched by:</b> <span
                                 style="font-size: 9pt">${sessionScope.moviedescription.numrating}</span></div>
-                        <div><b style="font-size: 11pt">总评分:</b> <span
-                                style="font-size: 9pt">${sessionScope.moviedescription.averating}分</span></div>
+                        <div><b style="font-size: 11pt">Average rating:</b> <span
+                                style="font-size: 9pt">${sessionScope.moviedescription.averating}</span></div>
                         <div><input id="allstar" value="${sessionScope.moviedescription.averating}"></div>
 
-                        <!--用户评分，如果用户登录且评分过则显示评分信息 -->
+                        <!--用户Rating，如果用户登录且Rating过则显示Rating信息 -->
                         <c:if test="${sessionScope.user != null&&sessionScope.userstar!=null}">
-                            <div><b style="font-size: 11pt">你的评分:</b> <span
-                                    style="font-size: 9pt">${sessionScope.userstar.star}分</span></div>
-                            <div><b style="font-size: 11pt">日期:</b><span style="font-size: 9pt">
+                            <div><b style="font-size: 11pt">Your Rating:</b> <span
+                                    style="font-size: 9pt">${sessionScope.userstar.star}</span></div>
+                            <div><b style="font-size: 11pt">Date:</b><span style="font-size: 9pt">
                                         <fmt:formatDate value="${sessionScope.userstar.reviewtime}"
                                                         pattern="yyyy-MM-dd"/>
                                     </span></div>
@@ -152,23 +151,23 @@
                         <!--喜欢按钮，如果用户登录则显示 -->
                         <c:if test="${sessionScope.user != null}">
                         <a  class="btn btn-default btn-md" id="liked" onclick="likedclick()" ><span
-                                class="glyphicon glyphicon-heart"></span><span class="fm-opt-label"> 喜欢</span></a>
+                                class="glyphicon glyphicon-heart"></span><span class="fm-opt-label"> Like</span></a>
                         </c:if>
                         <br><br>
 
-                        <!--播放按钮 -->
+                        <!--Play -->
                         <a class="btn btn-default btn-md"
-                           href="http://so.iqiyi.com/so/q_${sessionScope.moviedescription.moviename}" id="play"
+                           href="https://www.youtube.com/results?search_query=${sessionScope.moviedescription.moviename}" id="play"
                            target="_Blank"><span class="glyphicon glyphicon-play-circle"></span><span
-                                class="fm-opt-label"> 播放</span></a><br>
+                                class="fm-opt-label"> Play</span></a><br>
                         <br>
 
-                        <!--提交按钮，如果用户登录且未评分显示 -->
+                        <!--提交按钮，如果用户登录且未Rating显示 -->
                         <c:if test="${sessionScope.user != null&&sessionScope.userstar==null}">
                             <button id="submitevalutionstar" class="btn btn-default btn-md"
                                     onclick='$.post("./getstar",{userid:${sessionScope.user.userid},movieid:${sessionScope.moviedescription.movieid},time:getNowFormatDate(),star:$("#Evaluation").val()},function (data) {
                                             alert(data);window.location.href=window.location.href})'><span
-                                    class="glyphicon glyphicon-ok-circle"></span><span class="fm-opt-label"> 提交</span>
+                                    class="glyphicon glyphicon-ok-circle"></span><span class="fm-opt-label"> Submit</span>
                             </button>
 
                         </c:if>
@@ -203,17 +202,17 @@
                     <li role="presentation" class="active" style="text-align: center"><a href="#film-info"
                                                                                          aria-controls="film info"
                                                                                          data-toggle="tab"
-                                                                                         aria-expanded="true">简介</a>
+                                                                                         aria-expanded="true">Introduction</a>
                     </li>
                     <li role="presentation" class="" style="text-align: center"><a id="reviewsId"
                                                                                    href="#reviews"
                                                                                    aria-controls="reviews"
                                                                                    data-toggle="tab"
-                                                                                   aria-expanded="false">相似电影</a></li>
+                                                                                   aria-expanded="false">Similar movies</a></li>
                     <li role="presentation" class="" style="text-align: center"><a href="#resource"
                                                                                    aria-controls="resource"
                                                                                    data-toggle="tab"
-                                                                                   aria-expanded="false">电影资源</a></li>
+                                                                                   aria-expanded="false">Movie Resources</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -223,12 +222,12 @@
                         <br>
                         <h2>${sessionScope.moviedescription.moviename}</h2>
                         Directed by ${sessionScope.moviedescription.director}<br><br>
-                        <div><strong>演员表</strong></div>
+                        <div><strong>list of actors</strong></div>
                         <strong></strong>
                         ${sessionScope.moviedescription.leadactors}<br>
 
                         <br>
-                        <div><strong>故事简介</strong></div>
+                        <div><strong>Story introduction</strong></div>
                         <p><span style="font-weight: 400;"> ${sessionScope.moviedescription.description}</span></p>
                     </div>
 
@@ -241,10 +240,10 @@
                             <table class="table table-condensed">
                                 <thead>
                                 <tr>
-                                    <th style="font-size: 13pt">电影名</th>
-                                    <th style="font-size: 13pt">类型</th>
-                                    <th style="font-size: 13pt">导演</th>
-                                    <th style="font-size: 13pt">评分</th>
+                                    <th style="font-size: 13pt">Title</th>
+                                    <th style="font-size: 13pt">Category</th>
+                                    <th style="font-size: 13pt">Director</th>
+                                    <th style="font-size: 13pt">Rating</th>
                                 </tr>
                                 </thead>
                                 <tbody id="movietable">
@@ -259,57 +258,53 @@
                         <br>
                         <div class="全网搜索 clear none" id="qlink" style="display: block;">
                             <fieldset class="qBox qwatch">
-                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》在线观看
+                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Watch online
                                 </legend>
-                                <a href="http://so.iqiyi.com/so/q_${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">奇艺搜索</a>
+                                <a href="https://www.youtube.com/results?search_query=${sessionScope.moviedescription.moviename}"
+                                   target="_blank" rel="nofllow">Iqiyi</a>
                                 <a href="http://v.sogou.com/v?query=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">搜狗影视</a>
+                                   target="_blank" rel="nofllow">Sogou Film</a>
                                 <a href="http://www.quankan.tv/index.php?s=vod-search-wd-${sessionScope.moviedescription.moviename}.html"
-                                   target="_blank" rel="nofllow">全看网</a>
+                                   target="_blank" rel="nofllow">Quankan</a>
                                 <a href="http://www.soku.com/search_video/q_${sessionScope.moviedescription.moviename}?f=1&kb=020200000000000__${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">优酷</a>
+                                   target="_blank" rel="nofllow">Youku</a>
                                 <a href="http://www.acfun.cn/search/?#query=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">AcFun</a>
                                 <a href="http://search.bilibili.com/all?keyword=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">Bilibili</a></fieldset>
                             <fieldset class="qBox qdown">
-                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》资源下载&nbsp;
+                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Download&nbsp;
                                 </legend>
                                 <a href="http://www.atugu.com/infos/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">搜磁力</a>
+                                   target="_blank" rel="nofllow">Atuqu</a>
                                 <a href="http://www.btbtt.me/search-index-keyword-${sessionScope.moviedescription.moviename}.htm"
-                                   target="_blank" rel="nofllow">搜种子</a>
+                                   target="_blank" rel="nofllow">Btbtt</a>
                                 <a href="http://www.xilinjie.com/s?t=pan&amp;q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">搜网盘</a>
+                                   target="_blank" rel="nofllow">Xilinjie</a>
                                 <a href="https://www.ziyuanmao.com/#/result/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">资源猫</a>
+                                   target="_blank" rel="nofllow">Ziyuanmao</a>
                                 <a href="http://www.zimuku.cn/search?q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">字幕库</a>
+                                   target="_blank" rel="nofllow">Zimuku</a>
                                 <a href="http://www.zimuzu.tv/search?keyword=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">字幕组</a></fieldset>
+                                   target="_blank" rel="nofllow">Zimuzu</a></fieldset>
                             <fieldset class="qBox qdata">
-                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》资料介绍&nbsp;
+                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Introduction&nbsp;
                                 </legend>
                                 <a href="http://baike.baidu.com/search/word?word=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">百度百科</a>
-                                <a href="http://www.baike.com/wiki/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">互动百科</a>
-                                <a href="https://zh.wikipedia.org/wiki/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">维基百科</a>
+                                   target="_blank" rel="nofllow">Baidu baike</a>
                                 <a href="https://en.wikipedia.org/wiki/${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">Wiki</a></fieldset>
                             <fieldset class="qBox qreview">
-                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》评分影评
+                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Reviews
                                 </legend>
                                 <a href="https://m.douban.com/search/?query=${sessionScope.moviedescription.moviename}&amp;type=movie"
-                                   target="_blank" rel="nofllow">豆瓣电影</a>
+                                   target="_blank" rel="nofllow">Douban</a>
                                 <a href="http://search.mtime.com/search/?q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">时光网</a>
+                                   target="_blank" rel="nofllow">Mtime</a>
                                 <a href="http://www.imdb.com/find?q=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">IMDB</a>
                                 <a href="https://www.rottentomatoes.com/search/?search=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">烂番茄</a></fieldset>
+                                   target="_blank" rel="nofllow">Rotten Tomatoes</a></fieldset>
                         </div>
                     </div>
 
@@ -327,10 +322,10 @@
 
 <!--底部 -->
 <div class="footer">
-    <a href="/" target="_blank">客户端</a>
-    <a href="/" target="_blank">关于我们</a>
-    <a href="/" target="_blank">加入我们</a>
-    <div class="tip">Copyright © 2011-2018 &nbsp;&nbsp; <p>声明：本站不提供视频观看，将跳转到第三方网站进行观看</p></a>
+    <a href="/" target="_blank">Cliet</a>
+    <a href="/" target="_blank">About</a>
+    <a href="/" target="_blank">Join us</a>
+    <div class="tip">Copyright © 2011-2021 &nbsp;&nbsp; <p>This site does not provide video viewing, and will be redirected to a third-party website for viewing</p></a>
         &nbsp;
     </div>
 </div>
@@ -361,10 +356,10 @@
                         $("#movietable").append(headHtml);
                     })
                 }else
-                {alert("没有相似影片")}
+                {alert("No similar videos")}
             }
             else {
-                alert("加载更多图片资源错误");
+                alert("failed to load image ");
             }
         })
     })
@@ -379,15 +374,15 @@
             boollike=1;
         else
             boollike=0;
-        $.post("/likedmovie", {"movieid": "${sessionScope.moviedescription.movieid}","boollike":boollike,"userid":"${sessionScope.user.userid}"},function (data) {
+        $.post("./likedmovie", {"movieid": "${sessionScope.moviedescription.movieid}","boollike":boollike,"userid":"${sessionScope.user.userid}"},function (data) {
             if(data=="success") {
                 if (boollike == 1)
-                    alert("收藏成功");
+                    alert("success");
                 else
-                    alert("取消收藏");
+                    alert("Unfavorite");
             }
             else
-                alert("按钮事件失效")
+                alert("Failed!!")
         })
 
         $("#liked").toggleClass('likedactive');
@@ -472,7 +467,7 @@
         var searchText=$("#inp-query").val();
 
         $("#search-result").children().remove();
-        $.post("/search",{"search_text":searchText},function (data) {
+        $.post("./search",{"search_text":searchText},function (data) {
             if (data.status == 200) {
                 if(data.data.length!=0) {
                     $.each(data.data, function (i, item) {
@@ -489,12 +484,12 @@
                 }
                 else
                 {
-//                $("#search-result").html("查无此片");
-                    alert("差不到此电影哦~")
+//                $("#search-result").html("not found");
+                    alert("opps!this movie is not found ")
                 }
             }
             else {
-//            alert("加载更多图片资源错误");
+//            alert("failed to load image ");
             }
 
         })
@@ -507,9 +502,9 @@
 <script type="text/tmpl"  id="movie-tmpl">
  <li id="searchResult">
    <div>
-      <a value="{id}" style="text-decoration:none" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
+      <a value="{id}" style="text-decoration:none" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })'>
@@ -517,13 +512,13 @@
             <img src="{cover}" style="width:80px;height:120px">
          </div>
          <div  style="padding:12px">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;电影名称：{moviename}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Title：{moviename}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;上映时间:{showyear}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Release:{showyear}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;导演：{director}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Director：{director}</span>
              <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;评分：{averating}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Rating：{averating}</span>
          </div>
        </a>
    </div>
@@ -556,7 +551,7 @@
     function qzoneShare(){
         var qzone_shareBtn = document.getElementById("qzoneshareBtn")
         qzone_url = document.URL, //获取当前页面地址，也可自定义例：wb_url = "http://liuyanzhao.com"
-            qzone_title = "电影名称：${sessionScope.moviedescription.moviename}（来自梦的6次方）",
+            qzone_title = "Title：${sessionScope.moviedescription.moviename}",
             qzone_pic = "",
             qzone_language = "zh_cn";
         qzone_shareBtn.setAttribute("href","http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+qzone_url+"&title="+qzone_title+"&pic="+qzone_pic+"&language="+qzone_language+"");
@@ -567,7 +562,7 @@
         var qq_shareBtn = document.getElementById("qqshareBtn")
         qq_url = document.URL, //获取当前页面地址，也可自定义例：wb_url = "http://liuyanzhao.com"
 //            qq_appkey = "3118689721",//你的app key
-            qq_title = "电影名称：${sessionScope.moviedescription.moviename}（来自梦的6次方）",
+            qq_title = "Title：${sessionScope.moviedescription.moviename}）",
 //            wb_ralateUid = "5936412667",//微博id，获得你的用户名
             qq_pic = "",
             qq_language = "zh_cn";
@@ -579,7 +574,7 @@
         var wb_shareBtn = document.getElementById("wbshareBtn")
         wb_url = document.URL, //获取当前页面地址，也可自定义例：wb_url = "http://liuyanzhao.com"
             wb_appkey = "3118689721",//你的app key
-            wb_title = "电影：${sessionScope.moviedescription.moviename}（来自梦的6次方）",
+            wb_title = "电影：${sessionScope.moviedescription.moviename}",
             wb_pic = "",
             wb_language = "zh_cn";
         wb_shareBtn.setAttribute("href","http://service.weibo.com/share/share.php?url="+wb_url+"&appkey="+wb_appkey+"&title="+wb_title+"&pic="+wb_pic+"&language="+wb_language+"");

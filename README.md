@@ -3,7 +3,6 @@
 <img src=""
      style="float: left; margin-right: 0px;" />
 
-
 ---
 
 ## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
@@ -21,7 +20,6 @@ The background management system mainly manages user information and movie infor
 
 In the movie website system, the user's click events (such as which movie the user likes or the rating of a certain movie) are obtained and the information is transmitted to the recommendation system, the recommendation system makes corresponding processing based on the information, and recommends The result is stored in the mysql database, and the web front end displays the recommended movie to the user by querying the database
 
-
 ---
 
 ## SECTION 3 : CREDITS / PROJECT CONTRIBUTION
@@ -37,16 +35,25 @@ In the movie website system, the user's click events (such as which movie the us
 
 [![Music Match](Miscellaneous/yotube.png)](https://www.youtube.com/ "Music Match Video")
 
-
 ---
 
 ## SECTION 5 : USER GUIDE
 
 ### Requirements
 
+1.Install docker 20.10.5 in your computer.
 
+2.Download and unzip 
 
-Please, install the following packages
+[dockerMovieRec.zip]: https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
+
+ in C:\temp (create if not existing) on Windows10  or copy into \temp on Linux
+
+3.CD to \MovieRecommend, then run command "docker compose up -d"
+
+4.Open localhost:85/movie/
+
+All dataset and models are integrated with docker images
 
 
 

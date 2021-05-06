@@ -21,13 +21,13 @@
 
 <body>
 <div class="page-container">
-    <h1 style="color: white">请填写注册信息</h1>
+    <h1 style="color: white">Please fill in the registration information</h1>
     <form id="regForm_mod">
-        <%--用户名--%>
+        <%--User name --%>
         <div id="d1">
 
             <span  style="color: white" class="glyphicon glyphicon-user"></span>
-            <input type="text" name="username"  id="regName" placeholder="用 户 名" required="required" />
+            <input type="text" name="username"  id="regName" placeholder="User Name" required="required" />
             <span style="color: red"  class="usernameerror"></span>
 
         </div>
@@ -36,34 +36,32 @@
         <%--邮箱--%>
         <div  id="d2">
             <span style="color: white" class="glyphicon glyphicon-envelope"></span>
-            <input type="email" name="email"  id="email" placeholder="电子邮箱" required="required">
+            <input type="email" name="email"  id="email" placeholder="Email" required="required">
             <span  style="color: red" class="emailerror"></span>
         </div>
 
-        <%--密码--%>
+        <%-- password--%>
         <div id="d3">
             <span style="color: white" class="glyphicon glyphicon-asterisk"></span>
-            <input type="password" name="password" id="pwd" placeholder="密　码" required="required">
+            <input type="password" name="password" id="pwd" placeholder="Password" required="required">
             <span   style="color: red" class="pwderror"></span>
 
         </div>
 
-            <%--确认密码--%>
+            <%--确认 password--%>
         <div id="d4">
             <span style="color: white" class="glyphicon glyphicon-asterisk"></span>
-            <input type="password" id="pwdRepeat" placeholder="确 认 密 码" required="required">
+            <input type="password" id="pwdRepeat" placeholder="Confirm password" required="required">
             <span   style="color: red" class="pwdRerror"></span>
 
         </div>
 
-        <button  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal #identifier" type="button" style="background-color: #00b4ef" onclick="REGISTER.reg()">注册</button>
+        <button  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal #identifier" type="button" style="background-color: #00b4ef" onclick="REGISTER.reg()">Sign up</button>
             <%--邮箱提示信息--%>
 
          <ul class="bRadius2 mail">
-                <li data-mail="@qq.com" class="item item1" type="none">@qq.com</li>
-                <li data-mail="@sina.com" class="item item2" type="none">@sina.com</li>
-                <li data-mail="@126.com" class="item item3" type="none">@126.com</li>
-                <li data-mail="@163.com" class="item item4" type="none">@163.com</li>
+                <li data-mail="@126.com" class="item item3" type="none">@nus.edu.com</li>
+                <li data-mail="@163.com" class="item item4" type="none">@Yahoo.com</li>
                 <li data-mail="@gmail.com" class="item item5" type="none">@gmail.com</li>
          </ul>
     </form>
@@ -87,7 +85,7 @@
             <div class="modal-content"  style="height:620px;width: 810px">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="width: 30px">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">请选择您喜欢的电影</h4>
+                    <h4 class="modal-title" id="myModalLabel">Please choose a movie you like</h4>
                 </div>
                 <div class="modal-body">
                     <table id="tab" border="2px">
@@ -146,8 +144,8 @@
                 </div>
                 <div class="modal-footer" style="position: relative;top:40px;text-align: center;">
 
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 55px;height: 30px;">关闭</button>
-                    <button type="button" class="btn btn-primary" style="width: 55px;height: 30px" onclick="movieSubmit()">提交</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 55px;height: 30px;">Close</button>
+                    <button type="button" class="btn btn-primary" style="width: 55px;height: 30px" onclick="movieSubmit()">Submit</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -176,16 +174,16 @@
        if(ids!="") {
            $.post("../customer/register/movieSubmit", {'ids': ids}, function (data) {
                if(data=="ok") {
-                   alert("提交成功");
+                   alert("Submitted successfully");
                    $('#myModal').modal('hide');
                    location.href = "../page/login";
                }
                else
-                   alert("请至少选择一部电影");
+                   alert("Please select at least one movie");
            })
        }
        else
-           alert("请至少选择一部电影");
+           alert("Please select at least one movie");
 
     }
 
@@ -195,7 +193,7 @@
 
 <script type="text/javascript">
 
-    //用户名获得焦点
+    //User name 获得焦点
     $("#regName").focus(function () {
         $("#regName").removeClass("errorC");
         $("#regName").removeClass("checkedN");
@@ -211,14 +209,14 @@
         $(".emailerror").show();
         $(".emailerror").text("  ");
     });
-    //密码获得焦点
+    // password获得焦点
     $("#pwd").focus(function () {
         $("#pwd").removeClass("errorC");
         $("#pwd").removeClass("checkedN");
         $(".pwderror").show();
         $(".pwderror").text("  ");
     });
-    //确认密码获得焦点
+    //确认 password获得焦点
     $("#pwdRepeat").focus(function () {
         $("#pwdRepeat").removeClass("errorC");
         $("#pwdRepeat").removeClass("checkedN");
@@ -226,18 +224,18 @@
         $(".pwdRerror").text("  ");
     });
 
-    //用户名失去焦点
+    //User name 失去焦点
     $("#regName").blur(function () {
         if ($("#regName").val() == "") {
             $("#regName").addClass("errorC");
-            $(".usernameerror").html("<span>▲用户名不能为空</span>");
+            $(".usernameerror").html("<span>▲User name can not be empty</span>");
             $(".usernameerror").show();
 
 
         }
         else if($("#regName").val().length>10 || $("#regName").val().length<4){
             $(".usernameerror").show();
-            $(".usernameerror").html("<span>▲请输入4-10位长度用户名</span>").show();
+            $(".usernameerror").html("<span>▲User name should be between 4 to 10</span>").show();
             $("#regName").addClass("errorC");
         }
         else{
@@ -245,7 +243,7 @@
             $(".usernameerror").show();
             $(".usernameerror").text("");
         }
-        //判断用户名是否被占用
+        //判断User name 是否被占用
         var surl = "";
 
         var username = encodeURI(encodeURI($("#regName").val()));
@@ -255,7 +253,7 @@
                 if (data.data) {
                 } else {
                     $(".usernameerror").show();
-                    $(".usernameerror").html("<span>▲用户已被注册，请重新输入</span>");
+                    $(".usernameerror").html("<span>▲The user has been registered, please re-enter</span>");
                     $("#regName").addClass("errorC");
 //                    style = 'position: relative ;top:-20px;left: 200px;'
                 }
@@ -264,21 +262,21 @@
     });
 
 
-    //密码失去焦点
+    // password失去焦点
     $("#pwd").blur(function () {
         var reg1=/^.*[\d]+.*$/;
         var reg2=/^.*[A-Za-z]+.*$/;
-        var reg3=/^.*[_@#%&^+-/*\/\\]+.*$/;//验证密码
+        var reg3=/^.*[_@#%&^+-/*\/\\]+.*$/;//验证 password
 
         if ($("#pwd").val() == "") {
             $("#pwd").addClass("errorC");
             $(".pwderror").show();
-            $(".pwderror").html("▲密码不能为空");
+            $(".pwderror").html("▲ password can not be empty");
         }
         else if ($("#pwd").val().length>16 || $("#pwd").val().length<8){
             $("#pwd").addClass("errorC");
             $(".pwderror").show();
-            $(".pwderror").html("<span style = 'position: relative ;left: 28px;'>◀密码长度为8-16个字符</span>");
+            $(".pwderror").html("<span style = 'position: relative ;left: 28px;'>◀ password 8-16 characters in length</span>");
         }
         else if (!(reg1.test($("#pwd").val()) ||  reg2.test($("#pwd").val())|| reg3.test($("#pwd").val()) )){
             $("#pwd").addClass("errorC");
@@ -291,12 +289,12 @@
         }
 
     })
-    //确认密码失去焦点
+    //确认 password失去焦点
     $("#pwdRepeat").blur(function () {
         if ($("#pwd").val() != $("#pwdRepeat").val() || $("#pwdRepeat").val() =="") {
             $("#pwdRepeat").addClass("errorC");
             $(".pwdRerror").show();
-            $(".pwdRerror").html("▲密码不一致");
+            $(".pwdRerror").html("▲ Inconsistent passwords");
         }
         else{
             $("#pwdRepeat").addClass("checkedN");
@@ -357,13 +355,13 @@
         if ($("#email").val() == "") {
             $("#email").addClass("errorC");
             $(".emailerror").show();
-            $(".emailerror").html("▲邮箱不能为空");
+            $(".emailerror").html("▲Email can not be empty");
 
         }
         else if(!reg.test($("#email").val())){
             $("#email").addClass("errorC");
             $(".emailerror").show();
-            $(".emailerror").html("▲邮箱格式错误");
+            $(".emailerror").html("▲Email format error");
         }
 
         else {
@@ -379,7 +377,7 @@
                 if (data.data) {
                 } else {
                     $(".emailerror").show();
-                    $(".emailerror").html("<span>▲邮箱已被注册，请重新输入</span>");
+                    $(".emailerror").html("<span>▲Email has been registered, please re-enter</span>");
                     $("#email").addClass("errorC");
 //                    style = 'position: relative ;left: 290px;'
                 }
@@ -395,43 +393,43 @@
             var flag = true;
             var reg=/^\w+[@]\w+((.com)|(.net)|(.cn)|(.org)|(.gmail))$$/;
 
-            //不能为空检查
+            // can not be empty检查
             if ($("#regName").val() == "") {
-                alert("用户名不能为空！");
+                alert("User name  can not be empty！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
             if($("#regName").val().length>10 || $("#regName").val().length<4){
-                alert("请输入4-10位长度用户名！");
+                alert("Please input 4-10 length User name ！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
 
             if ($("#email").val() == "") {
-                alert("邮箱不能为空！");
+                alert("Email can not be empty！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
             if(!reg.test($("#email").val())){
-                alert("邮箱格式错误！");
+                alert("Email format error！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
 
 
             if ($("#pwd").val() == "") {
-                alert("密码不能为空！");
+                alert(" password can not be empty！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
             if($("#pwd").val().length>16 || $("#pwd").val().length<8){
-                alert("密码长度应为8-16个字符");
+                alert(" password length should be between 8 to 16");
                 flag = false;
                 $('#identifier').modal('hide');
             }
-            //密码检查
+            // password检查
             if ($("#pwd").val() != $("#pwdRepeat").val()) {
-                alert("两次密码不一致！");
+                alert("Passwords are inconsistent！");
                 flag = false;
                 $('#identifier').modal('hide');
             }
@@ -446,7 +444,7 @@
                     if (data.data) {
                         REGISTER.doSubmit();
                     } else {
-                        alert("用户名或者邮箱已被注册");
+                        alert("User name or the mailbox has been registered");
                         $('#identifier').modal('hide');
 
                     }
@@ -457,12 +455,12 @@
         doSubmit:function() {
             $.post("../customer/register",$("#regForm_mod").serialize(), function(data){
                 if(data.status == 200){
-                    alert('用户注册成功，请选择您喜欢的电影！');
+                    alert('User registration is successful, please select your favorite movie！');
 //                    REGISTER.login();
                     $('#myModal').modal('show');
 
                 } else {
-                    alert("注册失败！");
+                    alert("Registration failed！");
                     $('#identifier').modal('hide');
                 }
             });

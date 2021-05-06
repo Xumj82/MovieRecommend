@@ -6,7 +6,6 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title data-react-helmet="true">梦的6次方</title>
     <link rel="SHORTCUT ICON" href="./assets/img/knowU.ico"/>
     <link data-react-helmet="true" rel="prefetch" href="./assets/img/user_cover_image.jpg"/>
     <script src="./assets/js/jquery.js"></script>
@@ -41,28 +40,28 @@
     <div data-reactid="5">
         <!-- 导航栏-->
         <nav class="navbar navbar-default" role="navigation" style="background-color: black;margin-bottom: 0%">
-            <a class="navbar-brand" href="../" style="color: white">电影推荐网站</a>
+            <a class="navbar-brand" href="./" style="color: white">Movie recommendation</a>
 
             <div class="col-xs-4">
                 <input id="inp-query" class="form-control"
                        style="margin-bottom: 8px;margin-top: 8px;border-radius: 5px;" name="search_text" maxlength="60"
-                       placeholder="搜索电影" value="">
+                       placeholder="Search.." value="">
             </div>
-            <a class="navbar-brand" href="../index" style="color: white">选电影</a>
+            <a class="navbar-brand" href="./index" style="color: white">Select</a>
             <!-- 判断用户是否登录-->
             <c:if test="${sessionScope.user == null}">
-                <a class="dream" href="javascript:window.location.href='../page/register'" id="register"
+                <a class="dream" href="javascript:window.location.href='./page/register'" id="register"
                    style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                        style="color: white" class="glyphicon glyphicon-user"></span> 注册</a>
+                        style="color: white" class="glyphicon glyphicon-user"></span> Sign up</a>
                 <a class="dream" href="javascript:window.location.href='./page/login'"
                    style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                        style="color: white" class="glyphicon glyphicon-log-in"></span> 登录</a>
+                        style="color: white" class="glyphicon glyphicon-log-in"></span> Sign in</a>
             </c:if>
             <c:if test="${sessionScope.user != null}">
 
                 <a class="dream" id="logout" href="javascript:window.location.href='./page/logout'"
                    style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
-                        style="color: white" class="glyphicon glyphicon-log-in"></span> 退出</a>
+                        style="color: white" class="glyphicon glyphicon-log-in"></span> Logout</a>
                 <a class="dream" href="javascript:"
                    style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span
                         style="color: white" class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a>
@@ -109,7 +108,7 @@
 
                             <div class="ProfileHeader-content" data-reactid="87">
 
-                                <!-- 用户名称 -->
+                                <!-- User name 称 -->
                                 <div class="ProfileHeader-contentHead" data-reactid="88">
                                     <h1 class="ProfileHeader-title" data-reactid="89">
                                         <span class="ProfileHeader-name"
@@ -142,11 +141,11 @@
                                         <a href="#" class="Button Button--blue" data-toggle="modal"
                                            data-target="#userEditDialog"
                                            onclick="editUser(${sessionScope.user.userid})">
-                                            <!-- react-text: 117 -->编辑
+                                            <!-- react-text: 117 -->Edit
                                             <!-- /react-text -->
-                                            <!-- react-text: 118 -->个人
+                                            <!-- react-text: 118 -->personal
                                             <!-- /react-text -->
-                                            <!-- react-text: 119 -->资料
+                                            <!-- react-text: 119 -->profile
                                             <!-- /react-text -->
                                         </a></div>
                                 </div>
@@ -170,13 +169,13 @@
                                 <li role="presentation" class="active" style="text-align: center"><a href="#film-info"
                                                                                                      aria-controls="film info"
                                                                                                      data-toggle="tab"
-                                                                                                     aria-expanded="true">喜欢</a>
+                                                                                                     aria-expanded="true">like</a>
                                 </li>
                                 <li role="presentation" class="" style="text-align: center"><a id="reviewsId"
                                                                                                href="#reviews"
                                                                                                aria-controls="reviews"
                                                                                                data-toggle="tab"
-                                                                                               aria-expanded="false">已评价</a>
+                                                                                               aria-expanded="false">Evaluated</a>
                                 </li>
                             </ul>
 
@@ -186,7 +185,7 @@
                                      data-reactid="158">
                                     <div class="List-header" data-reactid="159">
                                         <h4 class="List-headerText" data-reactid="160"><span data-reactid="161">
-              <!-- react-text: 162 -->我喜欢的电影
+              <!-- react-text: 162 -->Movies i like
                           </span></h4>
                                         <div class="List-headerOptions" data-reactid="164"></div>
                                     </div>
@@ -200,9 +199,9 @@
                                                     <table width="100%" class="">
                                                         <tr class="item">
                                                             <td width="100" valign="top">
-                                                                <a class="nbg" value="${item.movieid}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
+                                                                <a class="nbg" value="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
                                                   if (data=="success") {
-                                                      location.href = "/MovieDescription"
+                                                      location.href = "./MovieDescription"
                                                   } else {
                                                   }
                                               })' title="${item.moviename}">
@@ -213,9 +212,9 @@
                                                             <td valign="top">
                                                                 <div class="pl2">
 
-                                                                    <a value="${item.movieid}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
+                                                                    <a value="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
                                                   if (data=="success") {
-                                                      location.href = "/MovieDescription"
+                                                      location.href = "./MovieDescription"
                                                   } else {
                                                   }
                                               })' class="">
@@ -223,12 +222,12 @@
                                                                     </a>
                                                                     <p class="pl"><fmt:formatDate type="date"
                                                                                                   value="${item.showyear}"
-                                                                                                  pattern="yyyy-MM-dd"/>上映</p>
-                                                                    <p class="pl">导演：${item.director}</p>
+                                                                                                  pattern="yyyy-MM-dd"/>Released</p>
+                                                                    <p class="pl">Director：${item.director}</p>
                                                                     <div class="star clearfix">
                                                                         <span class="allstar40"></span>
                                                                         <span class="rating_nums">${item.averating}</span>
-                                                                        <span class="pl">(${item.numrating}人评价)</span>
+                                                                        <span class="pl">(${item.numrating} reviews)</span>
 
                                                                     </div>
 
@@ -251,7 +250,7 @@
                                 <div class="tab-pane fade" id="reviews" data-zop-feedlistfather="1" data-reactid="158">
                                     <div class="List-header" data-reactid="159">
                                         <h4 class="List-headerText" data-reactid="160"><span data-reactid="161">
-              <!-- react-text: 162 -->我评价过的电影
+              <!-- react-text: 162 -->Movies I reviewed
                           </span></h4>
                                         <div class="List-headerOptions" data-reactid="164"></div>
                                     </div>
@@ -268,7 +267,7 @@
                                                             <td width="100" valign="top">
                                                                 <a class="nbg" value="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
                                                   if (data=="success") {
-                                                      location.href = "/MovieDescription"
+                                                      location.href = "./MovieDescription"
                                                   } else {
                                                   }
                                               })'>
@@ -279,8 +278,8 @@
                                                                 <div class="pl2">
                                                                     <div><input name="allstar" value="${item.star}">
                                                                     </div>
-                                                                    <div><b style="font-size: 11pt">你的评分:</b> <span
-                                                                            style="font-size: 9pt">${item.star}分</span>
+                                                                    <div><b style="font-size: 11pt">Your Rating:</b> <span
+                                                                            style="font-size: 9pt">${item.star}</span>
                                                                     </div>
                                           <span property="v:dtreviewed" content="2018-03-19" class="main-meta">
                                               <fmt:formatDate type="date" value="${item.reviewtime}"
@@ -306,7 +305,7 @@
                 <div class="Profile-sideColumn" data-za-module="RightSideBar" data-reactid="294">
                     <div class="Card" data-reactid="295">
                         <div class="Card-header Profile-sideColumnTitle" data-reactid="296">
-                            <div class="Card-headerText" data-reactid="297">推荐电影</div>
+                            <div class="Card-headerText" data-reactid="297">Recommended movies</div>
                         </div>
                     </div>
                     <!-- 右侧电影推荐列表 -->
@@ -317,11 +316,11 @@
                             <c:forEach var="item" items="${sessionScope.TopDefaultMovie}">
                                 <a class="Profile-lightItem" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })' value="${item.movieid}"><span class="Profile-lightItemName" data-reactid="331">${item.moviename}</span><span
-                                        class="Profile-lightItemValue" data-reactid="332">${item.averating}分</span></a>
+                                        class="Profile-lightItemValue" data-reactid="332">${item.averating}</span></a>
                             </c:forEach>
                         </c:if>
 
@@ -344,18 +343,18 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
+                <h4 class="modal-title" id="myModalLabel">Modify user information</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="edit_user_form">
                     <div class="form-group">
-                        <label for="edit_password" class="col-sm-2 control-label">用户密码</label>
+                        <label for="edit_password" class="col-sm-2 control-label">user password</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="edit_password" placeholder="" name="password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="edit_email" class="col-sm-2 control-label">用户邮箱</label>
+                        <label for="edit_email" class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="edit_email" placeholder="" name="email">
                         </div>
@@ -363,8 +362,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="UPDATE.updateUser()">保存修改</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="UPDATE.updateUser()">Save</button>
             </div>
         </div>
     </div>
@@ -407,12 +406,12 @@
                     })
                 }
                 else {
-//                $("#search-result").html("查无此片");
-                    alert("查不到此电影哦~")
+//                $("#search-result").html("not found");
+                    alert("opps!!cannot found this movie")
                 }
             }
             else {
-//            alert("加载更多图片资源错误");
+//            alert("failed to load image ");
             }
 
         })
@@ -425,9 +424,9 @@
 <script type="text/tmpl" id="movie-tmpl">
  <li id="searchResult">
    <div>
-      <a value="{id}" style="text-decoration:none" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
+      <a value="{id}" style="text-decoration:none" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("value")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })'>
@@ -435,13 +434,13 @@
             <img src="{cover}" style="width:80px;height:120px">
          </div>
          <div  style="padding:12px">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;电影名称：{moviename}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Title：{moviename}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;上映时间:{showyear}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Release:{showyear}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;导演：{director}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Director：{director}</span>
              <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;评分：{averating}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Rating：{averating}</span>
          </div>
        </a>
    </div>
@@ -486,13 +485,13 @@
         });
     }
 
-    <%--更改密码--%>
+    <%--更改 password--%>
     var UPDATE = {
         checkInput: function () {
 
             if ($("#edit_password").val()) {
                 if ($("#edit_password").val().length < 6 || $("#edit_password").val().length > 12) {
-                    alert("密码必须在6-12之间！");
+                    alert(" password must be between 6-12！");
                     return false;
                 }
 
@@ -506,7 +505,7 @@
                 "password": $("#edit_password").val(),
                 "email": $("#edit_email").val()
             }, function (data) {
-                alert("用户密码更新成功！");
+                alert("user password updated！");
                 window.location.reload();
             });
         },

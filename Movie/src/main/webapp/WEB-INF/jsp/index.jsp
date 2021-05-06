@@ -15,7 +15,7 @@
     <script src="./assets/js/jquery.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <link rel="SHORTCUT ICON" href="./assets/img/knowU.ico"/>
-    <!-- 电影推荐模块CSS-->
+    <!-- Movie recommendation模块CSS-->
     <link href="./assets/css/bootstrap.css" rel="stylesheet">
     <link href="./assets/css/SuggestList.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/wholeframe.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
     <!-- 电影选择模块CSS（类型/排序/展示）-->
     <%--<link rel="stylesheet" href="https://img3.doubanio.com/f/movie/fc5a7b9631f6e089a6a047e0e701207243e3fbdf/css/movie/project/gaia/__init__.css" />--%>
     <link rel="stylesheet" href="./assets/css/__init__.css" />
-<!-- 电影推荐模块CSS-->
+<!-- Movie recommendation模块CSS-->
     <link rel="stylesheet" href="https://img3.doubanio.com/misc/mixed_static/554ab01e9256e005.css">
     <!-- 鼠标悬浮在<A>时背景和导航栏同步-->
     <style type="text/css">
@@ -100,20 +100,20 @@
 
 <!-- 导航栏-->
 <nav class="navbar navbar-default" role="navigation" style="background-color: black;margin-bottom: 0%">
-    <a class="navbar-brand" href="./" style="color: white">懂你<img src="./assets/img/title.gif">电影</a>
+    <a class="navbar-brand" href="./" style="color: white">Home</a>
 
     <div class="col-xs-4">
-    <input id="inp-query" class="form-control" style="margin-bottom: 8px;margin-top: 8px;border-radius: 5px;" name="search_text"  maxlength="60" placeholder="搜索电影" value="">
+    <input id="inp-query" class="form-control" style="margin-bottom: 8px;margin-top: 8px;border-radius: 5px;" name="search_text"  maxlength="60" placeholder="Search.." value="">
     </div>
-    <a class="navbar-brand" href="./index" style="color: white">选电影</a>
+    <a class="navbar-brand" href="./index" style="color: white">Select</a>
     <!-- 判断用户是否登录-->
             <c:if test="${sessionScope.user == null}">
-            <a  class="dream" href="javascript:window.location.href='./page/register'" id="register" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-user"></span> 注册</a>
-            <a  class="dream" href="javascript:window.location.href='./page/login'" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-log-in"></span> 登录</a>
+            <a  class="dream" href="javascript:window.location.href='./page/register'" id="register" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-user"></span> Sign up</a>
+            <a  class="dream" href="javascript:window.location.href='./page/login'" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-log-in"></span> Sign in</a>
             </c:if>
             <c:if test="${sessionScope.user != null}">
 
-                <a class="dream" id="logout" href="javascript:window.location.href='./page/logout'" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-log-in"></span>  退出</a>
+                <a class="dream" id="logout" href="javascript:window.location.href='./page/logout'" style="float: right;color: white;font-size: 13pt;margin-top: 10px;margin-right: 10px"><span style="color: white" class="glyphicon glyphicon-log-in"></span> Logout</a>
                 <a class="dream" onclick='javascript:$.post("./page/profile",{"id":"${sessionScope.user.userid}"}, function (data) {
             if (data=="success") {
                 location.href = "./profile"
@@ -127,7 +127,7 @@
 
 <div id="wrapper" class="col-md-12" style="margin-left: 5%">
     <div id="content">
-        <h1>选电影</h1>
+        <h1>Select</h1>
         <div class="grid-16-8 clearfix">
 
             <!-- 左侧电影展示模块-->
@@ -144,7 +144,7 @@
 
                                 <div class="tags">
                                     <div id="tags-list" class="tag-list">
-                                        <label  class="activate" style="font-size: 13pt" value="0">全部
+                                        <label  class="activate" style="font-size: 13pt" value="0">All
                                             <input type="radio" name="tag" value="0">
                                         </label>
                                         <!-- 从数据库到seesion读入，默认第一个选中activate-->
@@ -164,13 +164,13 @@
                                 <div class="tool" style="">
                                     <div class="sort">
                                         <label>
-                                            <input  type="radio" name="sort" value="numrating" checked="checked"> 按热度排序
+                                            <input  type="radio" name="sort" value="numrating" checked="checked"> Sort by popularity
                                         </label>
                                         <label>
-                                            <input type="radio" name="sort" value="showyear"> 按时间排序
+                                            <input type="radio" name="sort" value="showyear"> Sort by time
                                         </label>
                                         <label>
-                                            <input type="radio" name="sort" value="averating"> 按评价排序
+                                            <input type="radio" name="sort" value="averating"> Sort by rating
                                         </label>
                                     </div>
 
@@ -189,7 +189,7 @@
 
                             <c:if test="${sessionScope.movie != null}">
                                 <c:forEach var="item"   items="${sessionScope.movie}">
-                                    <a class="item"   target="_blank" name="imgitem" id="${item.movieid}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("id")}, function (data) {
+                                    <a class="item"   target="_blank" name="imgitem" id="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("id")}, function (data) {
                                     if (data == "success") {
                                         location.href = "./MovieDescription"
                                     } else {
@@ -211,9 +211,9 @@
                             </c:if>
                         </div>
 
-                        <!-- 加载更多<a>-->
+                        <!-- Load more<a>-->
 
-                        <a class="more" id="loadmore" href="javascript:;">加载更多</a>
+                        <a class="more" id="loadmore" href="javascript:;">Load more</a>
                     </div>
                 </div>
 
@@ -222,24 +222,6 @@
             <!-- 右侧推荐模块（基本未修改/后期可修改）-->
 
             <div  class="aside">
-                    <h1 style="margin-top: -38px;margin-left: -100px;">电影推荐</h1>
-                    <div id="doulist" style="width: 350px;margin-left: -100px">
-                        <ul>
-                            <li>
-                                <span>3381推荐</span>
-                                <div class="title"><a  target="_blank" href="https://www.douban.com/doulist/30327/">100部爱情电影 经典的回味</a></div>
-                            </li>
-                            <li>
-                                <span>1159推荐</span>
-                                <div class="title"><a  target="_blank" href="https://www.douban.com/doulist/31478/">很轻的电影和很重的人生</a></div>
-                            </li>
-                            <li>
-                                <span>3381推荐</span>
-                                <div class="title"><a   target="_blank" href="https://www.douban.com/doulist/200218/">得此两百部，足以度余生</a></div>
-                            </li>
-
-                        </ul>
-                    </div>
                     <!-- 推荐模块默认五个-->
                     <div  style="margin-left: -30px;margin-top: -7px">
                         <div id="myCarousel" class="carousel slide"  data-ride="carousel" style=" margin-top: 35px ;width: 370px;margin-left: -80px">
@@ -257,7 +239,7 @@
                                     <c:forEach var="item"   items="${sessionScope.TopDefaultMovie}" varStatus="i">
                                         <c:if test="${i.count==1&&i.count<6}">
                                             <div class="item active">
-                                                <img src="${item.backpost}" alt="${item.movieid}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("alt")}, function (data) {
+                                                <img src="${item.backpost}" alt="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("alt")}, function (data) {
                                                 if (data=="success") {
                                                     location.href = "./MovieDescription"
                                                 } else {
@@ -267,7 +249,7 @@
                                         </c:if>
                                         <c:if test="${i.count!=1&&i.count<6}">
                                             <div class="item">
-                                                <img src="${item.backpost}" alt="${item.movieid}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("alt")}, function (data) {
+                                                <img src="${item.backpost}" alt="${item.movieid}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("alt")}, function (data) {
                                                 if (data=="success") {
                                                     location.href = "./MovieDescription"
                                                 } else {
@@ -287,17 +269,17 @@
                                             <div class="clash-card__unit-stats clash-card__unit-stats--giant clearfix">
                                                 <div class="one-third">
                                                    <%--<div class="stat">2<sup>M</sup></div>--%>
-                                                        <div class="stat">上映日期</div>
+                                                        <div class="stat">Release date</div>
                                                         <div class="stat-value"><fmt:formatDate value="${sessionScope.TopDefaultMovie[0].showyear}" pattern="yyyy-MM-dd"/></div>
                                                 </div>
 
                                                 <div class="one-third">
-                                                    <div class="stat">多少人看</div>
+                                                    <div class="stat">Watched by</div>
                                                     <div class="stat-value">${sessionScope.TopDefaultMovie[0].numrating}</div>
                                                 </div>
 
                                                 <div class="one-third no-border">
-                                                    <div class="stat">电影总评</div>
+                                                    <div class="stat">Movie review</div>
                                                     <div class="stat-value">${sessionScope.TopDefaultMovie[0].averating}</div>
                                                 </div>
 
@@ -315,11 +297,11 @@
     <ul id="search-result">
     </ul>
 </div>
-<!-- 点击加载更多事件，通过SC模板加载电影信息-->
+<!-- 点击Load more事件，通过SC模板加载电影信息-->
 
 <script>
     $(document).on("click",'#loadmore',function() {
-        $.post("/loadingmore",{molimit:$("#list").children("a").length,type:$("label[class='activate']").attr("value"),sort: $("input[name='sort']:checked").val()},
+        $.post("./loadingmore",{molimit:$("#list").children("a").length,type:$("label[class='activate']").attr("value"),sort: $("input[name='sort']:checked").val()},
             function (data) {
             if (data.status == 200) {
                 if(data.data.length!=0) {
@@ -338,14 +320,13 @@
                         $("#list").append(headHtml);
                 })
                 }else
-                {alert("没有更多影片了")}
+                {alert("No more")}
             }
             else {
-                alert("加载更多图片资源错误");
+                alert("failed to load image ");
             }
         })
-        //headHtml = headHtml.replace(/{url}/g,"https://movie.douban.com/subject/26882533/?tag=热门");
-        //headHtml = headHtml.replace(/{tag}/g,"热门");
+
     })
 
 </script>
@@ -354,9 +335,9 @@
 
 <script type="text/tmpl" id="subject-tmpl">
 
-        <a class="item"  name="imgitem" target="_blank" id="{id}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("id")}, function (data) {
+        <a class="item"  name="imgitem" target="_blank" id="{id}" onclick='javascript:$.post("./Customer/Description",{id:$(this).attr("id")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })'>
@@ -377,15 +358,15 @@
              <div class="clash-card__unit-description">{moviedescription}</div>
              <div class="clash-card__unit-stats clash-card__unit-stats--giant clearfix">
                     <div class="one-third">
-                          <div class="stat">上映日期</div>
+                          <div class="stat">Release date</div>
                           <div class="stat-value">{showyear}</div>
                     </div>
                     <div class="one-third">
-                          <div class="stat">多少人看</div>
+                          <div class="stat">watched by</div>
                           <div class="stat-value">{numrating}</div>
                     </div>
                     <div class="one-third no-border">
-                          <div class="stat">电影总评</div>
+                          <div class="stat">Movie review</div>
                           <div class="stat-value">{averating}</div>
                     </div>
              </div>
@@ -465,12 +446,12 @@ function changeTwoDecimal_f(x)
                 }
                 else
                 {
-//                $("#search-result").html("查无此片");
-                    alert("差不到此电影哦~")
+//                $("#search-result").html("not found");
+                    alert("opps!this movie is not found ")
                 }
             }
             else {
-           // alert("加载更多图片资源错误");
+           // alert("failed to load image ");
             }
 
         })
@@ -485,7 +466,7 @@ function changeTwoDecimal_f(x)
    <div>
       <a value="{id}" style="text-decoration:none" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })'>
@@ -493,13 +474,13 @@ function changeTwoDecimal_f(x)
             <img src="{cover}" style="width:80px;height:120px">
          </div>
          <div  style="padding:12px">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;电影名称：{moviename}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Title：{moviename}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;上映时间:{showyear}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Release:{showyear}</span>
             <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;导演：{director}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Director：{director}</span>
              <br>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;评分：{averating}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;Rating：{averating}</span>
          </div>
        </a>
    </div>
@@ -586,7 +567,7 @@ function changeTwoDecimal_f(x)
         $("#list").children().remove();
         //如果type为0请求全部刷新页面
         //请求数据对应的电影类型
-        $.post("/typesortmovie", {
+        $.post("./typesortmovie", {
             molimit:$("#list").children("a").length,
             type: $(this).attr("value"),
             sort: $("input[name='sort']:checked").val()
@@ -609,11 +590,11 @@ function changeTwoDecimal_f(x)
                     })
                 }
                 else {
-                    alert("没有该类型影片数据")
+                    alert("No more data")
                 }
             }
             else {
-                alert("请求电影信息错误");
+                alert("Failed to request movie info");
             }
         })
     })
@@ -624,7 +605,7 @@ function changeTwoDecimal_f(x)
     $("input[name='sort']").click(function () {
         $("#list").children().remove()
         //请求数据对应的电影类型
-        $.post("/typesortmovie", {
+        $.post("./typesortmovie", {
             molimit:$("#list").children("a").length,
             sort: $(this).attr("value"),
             type: $("label[class='activate']").attr("value")
@@ -647,7 +628,7 @@ function changeTwoDecimal_f(x)
                     })
                 }
                 else {
-                    alert("排序失败");
+                    alert("Sort failed");
                 }
             }
         })

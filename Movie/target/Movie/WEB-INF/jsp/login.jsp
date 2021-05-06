@@ -20,11 +20,11 @@
     <h1 style="color: white">Login</h1>
     <form id="logForm_mod">
         <span style="color: white" class="glyphicon glyphicon-user"></span>
-        <input type="text" name="username" id="loginUsername" placeholder="用户名" required="required">
+        <input type="text" name="username" id="loginUsername" placeholder="User name" required="required">
         <span style="color: white" class="glyphicon glyphicon-asterisk"></span>
-        <input type="password" name="password" id="loginPassword" placeholder="密　码" required="required">
-        <button type="button" id="login" onclick="LOGIN.login()">登录</button>
-        <button type="button" id="register" style="background-color: #00b4ef">注册</button>
+        <input type="password" name="password" id="loginPassword" placeholder="Password" required="required">
+        <button type="button" id="login" onclick="LOGIN.login()">Sign in</button>
+        <button type="button" id="register" style="background-color: #00b4ef">Sign up</button>
     </form>
 </div>
 
@@ -35,11 +35,11 @@
         checkInput: function () {
 
             if (!$("#loginUsername").val()) {
-                alert("请输入登录名！");
+                alert("Please input user name！");
                 return false;
             }
             if ($("#loginUsername").val() && !$("#loginPassword").val()) {
-                alert("请输入密码！");
+                alert("Please input password！");
                 return false;
             }
             return true;
@@ -47,10 +47,10 @@
         doLogin: function () {
             $.post("../customer/login", $("#logForm_mod").serialize(), function (data) {
                 if (data.status == 200) {
-                    alert("登录成功！");
-                    location.href = "/"
+                    alert("Success！");
+                    location.href = "../"
                 } else {
-                    alert("登录失败，原因是：" + data.msg);
+                    alert("Failed!! " + data.msg);
                 }
             });
         },

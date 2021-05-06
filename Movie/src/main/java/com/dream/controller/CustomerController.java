@@ -130,7 +130,7 @@ public class CustomerController {
         request.getSession().removeAttribute("reviews");
         request.getSession().removeAttribute("booluserunlikedmovie");
         request.getSession().removeAttribute("TopRegDefaultMovie");
-        return "Home";
+        return "redirect:/";
 
     }
 
