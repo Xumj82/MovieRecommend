@@ -43,7 +43,7 @@ In the movie website system, the user's click events (such as which movie the us
 
 1.Install docker 20.10.5 in your computer.
 
-2.Download and unzip 
+2.Download and unzip https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
 
 [dockerMovieRec.zip]: https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
 
