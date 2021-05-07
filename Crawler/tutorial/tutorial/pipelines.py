@@ -11,7 +11,7 @@ from tutorial.items import MovieItem
 class TutorialPipeline(object):
 
     def __init__(self):
-        self.conn = pymysql.connect(user='root', password='123456', database='movie')
+        self.conn = pymysql.connect(user='root', password='abc123456', database='movie')
         self.cursor = self.conn.cursor()
 
 
