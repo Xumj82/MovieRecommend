@@ -261,7 +261,7 @@
                                 <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Watch online
                                 </legend>
                                 <a href="https://www.youtube.com/results?search_query=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Iqiyi</a>
+                                   target="_blank" rel="nofllow">Youtube</a>
                                 <a href="http://v.sogou.com/v?query=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">Sogou Film</a>
                                 <a href="http://www.quankan.tv/index.php?s=vod-search-wd-${sessionScope.moviedescription.moviename}.html"
@@ -272,21 +272,6 @@
                                    target="_blank" rel="nofllow">AcFun</a>
                                 <a href="http://search.bilibili.com/all?keyword=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">Bilibili</a></fieldset>
-                            <fieldset class="qBox qdown">
-                                <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Download&nbsp;
-                                </legend>
-                                <a href="http://www.atugu.com/infos/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Atuqu</a>
-                                <a href="http://www.btbtt.me/search-index-keyword-${sessionScope.moviedescription.moviename}.htm"
-                                   target="_blank" rel="nofllow">Btbtt</a>
-                                <a href="http://www.xilinjie.com/s?t=pan&amp;q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Xilinjie</a>
-                                <a href="https://www.ziyuanmao.com/#/result/${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Ziyuanmao</a>
-                                <a href="http://www.zimuku.cn/search?q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Zimuku</a>
-                                <a href="http://www.zimuzu.tv/search?keyword=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Zimuzu</a></fieldset>
                             <fieldset class="qBox qdata">
                                 <legend>《<span class="keyword">${sessionScope.moviedescription.moviename}</span>》Introduction&nbsp;
                                 </legend>
@@ -299,8 +284,6 @@
                                 </legend>
                                 <a href="https://m.douban.com/search/?query=${sessionScope.moviedescription.moviename}&amp;type=movie"
                                    target="_blank" rel="nofllow">Douban</a>
-                                <a href="http://search.mtime.com/search/?q=${sessionScope.moviedescription.moviename}"
-                                   target="_blank" rel="nofllow">Mtime</a>
                                 <a href="http://www.imdb.com/find?q=${sessionScope.moviedescription.moviename}"
                                    target="_blank" rel="nofllow">IMDB</a>
                                 <a href="https://www.rottentomatoes.com/search/?search=${sessionScope.moviedescription.moviename}"

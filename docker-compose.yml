@@ -133,7 +133,7 @@ services:
         movierec:
             ipv4_address: 172.19.0.9
   flume:
-    image: flume:1.7.0
+    image: xumj1996docker/flume
     container_name: flume
     depends_on:
       - kafka
