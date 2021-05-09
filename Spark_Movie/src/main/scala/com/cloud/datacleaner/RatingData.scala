@@ -5,12 +5,6 @@ import org.apache.spark.sql.{SaveMode, SQLContext}
 import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.{SparkContext, SparkConf}
 
-/**
-  * 测试对数据建立模型
-  * spark中提交方式：
-  *   spark-submit --class com.zxl.datacleaner.RatingData lib/Spark_Movie.jar
-  * Created by ZXL on 2018/2/28.
-  */
 object RatingData {
   def main(args: Array[String]) {
     val localClusterURL = "local[2]"

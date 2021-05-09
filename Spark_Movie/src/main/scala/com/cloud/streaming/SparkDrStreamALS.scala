@@ -2,12 +2,9 @@ package com.cloud.streaming
 import com.cloud.conf.AppConf
 
 import java.sql.{Connection, DriverManager}
-import com.cloud.caseclass.{Result, UserRating,Heartbreak}
+import com.cloud.caseclass.{Heartbreak, Result, UserRating}
 import com.cloud.utils.DBUtils
 import kafka.serializer.StringDecoder
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.recommendation.ALS
-import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SPARK_VERSION, SparkConf, SparkContext}
 import org.apache.spark.mllib.recommendation.MatrixFactorizationModel
 import org.apache.spark.sql.hive.HiveContext
@@ -15,7 +12,6 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Duration, StreamingContext}
 
 import scala.collection.mutable.ArrayBuffer
-import scala.util.Random
 
 
 /**
@@ -29,6 +25,7 @@ object SparkDrStreamALS extends Serializable {
 
     val conf = new SparkConf().setAppName("SparkDrStream").setMaster("local[2]")
     val sc = new SparkContext(conf)
+    val hc = new HiveContext(sc)
     val modelpath = "/tmp/Model"
     val model = MatrixFactorizationModel.load(sc, modelpath)
     // Duration对象中封装了时间的一个对象，它的单位是ms.
@@ -37,63 +34,43 @@ object SparkDrStreamALS extends Serializable {
     val ssc = new StreamingContext(sc, batchDuration)
     ssc.checkpoint("/data/movieck2")
     val topics = Set("movielog")
-    val kafkaParams = Map("metadata.broker.list" -> "172.19.0.9:9092")
-
+    val kafkaParams = Map("metadata.broker.list" -> "kafka:9092")
     val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topics)
-
-
+    messages.print()
     val messagesDStream = messages.map(_._2).map(line => {
       var heartbreak: Heartbreak = null
       if (line != null) {
         try {
-          val fields = line.split(";")
-          if (fields.length == 3) {
-            heartbreak = Heartbreak(fields(0).toInt, fields(1).toInt, fields(2).toInt)
+          val fields = line.split(",")
+          if (fields.length == 5) {
+            println(fields(0))
+            heartbreak = Heartbreak(fields(0).toInt, fields(1).toInt, fields(2).toInt,fields(3).toInt,0)
           }
         } catch {
           case e => e
+            println("Error")
         }
       }
       heartbreak
     }).filter(x=>x != null)
 
 
-
-    // 去除重复数据（就是该用户对某一个电影的评分发生改变）
-    // updateStateByKey: 以DStream中的数据进行按key做reduce操作，然后对各个批次的数据进行累加
-//    val pagetime = messagesDStream.map { case Heartbreak(userid,movieid,count) => {
-//      ((userid,movieid),count)
-//    }
-//    }.updateStateByKey { (values: Seq[Int], now: Option[Int]) => {
-//      //now:是当前的评分数据
-//      //values:是历史评分数据
-//      var latest: Int= now
-//      if (values.size > 0) {
-//        latest = values(0)
-//      }
-//      Some(latest)
-//    }
-//    }.map { case ((userid,movieid),count) =>
-//      Heartbreak(userid,movieid,count)
-//    }
     messagesDStream.print()
     messagesDStream.foreachRDD(rec=>{
       rec.collect().foreach(x=>{
-        println(x.count)
-        val userFCFactor = 10-x.count
-        val itemFCFactor = x.count
-        val rec = model.recommendProducts(x.userid ,10)
-        val uidString = rec.map(x => x.user.toString() + "," + x.product.toString() + "," + x.rating.toString())
-        val movieIds = uidString.map(_.split(",")).map(x => x(1).trim().toInt).toList.take(userFCFactor)
-        val similarMovies = get5SimilarMovies(x.movieid).toList.take(itemFCFactor)
-        val recMovies = movieIds ++ similarMovies
-        val recMoviesStr = recMovies.toList.distinct
-        val t = Random.shuffle(recMoviesStr).take(8)
-        recMoviesStr.foreach(x=>{
-          println(x)
-        })
-        // 将推荐结果写入数据库
-        resultInsertIntoMysql(x.userid, recMoviesStr.mkString(","))
+        println(x.count+" ; "+x.star+" ; "+x.time)
+        if(x.count>=10 || x.star>4){
+          //val rec = model.recommendProducts(x.userid ,10)
+          //val uidString = rec.map(x => x.user.toString() + "," + x.product.toString() + "," + x.rating.toString())
+          val similarMovies = get5SimilarMovies(x.movieid).toList
+          val recMovies = similarMovies
+          val recMoviesStr = recMovies.toList.distinct
+          recMoviesStr.foreach(x=>{
+            println(x)
+          })
+          // 将推荐结果写入数据库
+          resultInsertIntoMysql(x.userid, recMoviesStr.mkString(","))
+        }
       })
     })
 
@@ -178,7 +155,7 @@ object SparkDrStreamALS extends Serializable {
     try {
       connection = DBUtils.getConnection()
       val statement = connection.createStatement()
-      val resultSet = statement.executeQuery("select itemid2 from similartab where itemid1 = " + movieId + " order by similar limit 10")
+      val resultSet = statement.executeQuery("select itemid2 from similartab where itemid1 = " + movieId + " order by similar limit 5")
 
       while (resultSet.next()) {
         movies += resultSet.getInt("itemid2")

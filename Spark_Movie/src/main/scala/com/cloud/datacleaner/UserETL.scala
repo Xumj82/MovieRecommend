@@ -1,7 +1,7 @@
 package com.cloud.datacleaner
 
-import com.cloud.ModelTrain.ItemCF._
-import com.cloud.ModelTrain.{ItemSimilarity, ItemPref}
+//import com.cloud.ModelTrain.ItemCF._
+//import com.cloud.ModelTrain.{ItemSimilarity, ItemPref}
 import com.cloud.caseclass.Users
 import com.cloud.conf.AppConf
 import org.apache.spark.sql.SaveMode
@@ -17,12 +17,12 @@ object UserETL extends AppConf {
     import sqlContext.implicits._
 
     // 2 读取样本数据
-    val data_path = "hdfs://movie1:9000/movie/data/users.txt"
+    val data_path = "hdfs://movie1:9000/movie/data/users.csv"
     val data = sc.textFile(data_path, 8)
     val userdata = data.map(_.split(",")).map(f => Users(f(0).toInt,f(1),f(2).toInt,f(3).toInt)).cache()
 
     val userDF = userdata.toDF()
     // 存储结果至数据库
-    userDF.write.mode(SaveMode.Append).jdbc(jdbcURL, userTable, prop)
+    //userDF.write.mode(SaveMode.Append).jdbc(jdbcURL, userTable, prop)
   }
 }

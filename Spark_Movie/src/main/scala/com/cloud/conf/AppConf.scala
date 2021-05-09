@@ -6,10 +6,6 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.{SparkContext, SparkConf}
 
-/**
-  * 用于创建spark程序入口，供其他程序继承
-  * Created by ZXL on 2018/3/4.
-  */
 trait AppConf {
   val localClusterURL = "local[2]"
   val clusterMasterURL = "spark://spark1:7077"
@@ -23,7 +19,7 @@ trait AppConf {
   val recResultTable = "movie.similarTab"
   val top5Table = "movie.top5Result"
   val userTable= "movie.user"
-  val ratingTable= "movie.rating"
+  val ratingTable= "movie.ratings"
   val mysqlusername = "root"
   val mysqlpassword = "abc123456"
   val prop = new Properties

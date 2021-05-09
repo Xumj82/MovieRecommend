@@ -47,6 +47,8 @@ In the movie website system, the user's click events (such as which movie the us
 
 [dockerMovieRec.zip]: https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
 
+
+
  in C:\temp (create if not existing) on Windows10  or copy into \temp on Linux
 
 3.CD to \MovieRecommend, then run command "docker compose up -d"

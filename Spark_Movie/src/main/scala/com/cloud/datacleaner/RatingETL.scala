@@ -15,12 +15,12 @@ object RatingETL extends AppConf {
     import sqlContext.implicits._
 
     // 2 读取样本数据
-    val data_path = "hdfs://movie1:9000/movie/data/ratings.txt"
-    val data = sc.textFile(data_path, 8)
-    val userdata = data.map(_.split(",")).map(f => UserRating(f(0).toInt,f(1).toInt,f(2).toDouble)).cache()
+    val ratingdata = hc.sql("select * from ratings").toDF()
+    //val ratingdata = data.map(_.split(",")).map(f => UserRating(f(0).toInt,f(1).toInt,f(2).toDouble)).cache()
 
-    val userDF = userdata.toDF()
+    //val userDF = ratingdata.toDF()
+    ratingdata.show()
     // 存储结果至数据库
-    userDF.write.mode(SaveMode.Append).jdbc(jdbcURL, ratingTable, prop)
+    ratingdata.write.mode(SaveMode.Append).jdbc(jdbcURL, ratingTable, prop)
   }
 }

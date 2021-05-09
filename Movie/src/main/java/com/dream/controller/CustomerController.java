@@ -20,9 +20,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
-/**
- * Created by ZXL on 2018/3/1.
- */
 
 @Controller
 public class CustomerController {

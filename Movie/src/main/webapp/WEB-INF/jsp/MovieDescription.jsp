@@ -166,7 +166,11 @@
                         <c:if test="${sessionScope.user != null&&sessionScope.userstar==null}">
                             <button id="submitevalutionstar" class="btn btn-default btn-md"
                                     onclick='$.post("./getstar",{userid:${sessionScope.user.userid},movieid:${sessionScope.moviedescription.movieid},time:getNowFormatDate(),star:$("#Evaluation").val()},function (data) {
-                                            alert(data);window.location.href=window.location.href})'><span
+                                            alert(data);window.location.href=window.location.href});
+                                            $.ajax({
+                                            type: "get",
+                                            url:"./heartbreak?userid=${sessionScope.user.userid}&movieid=${sessionScope.moviedescription.movieid}&count="+0+"&star="+$("#Evaluation").val()+"&time="+new Date().getTime()
+                                            })'><span
                                     class="glyphicon glyphicon-ok-circle"></span><span class="fm-opt-label"> Submit</span>
                             </button>
 
@@ -374,6 +378,10 @@
             boollike=1;
         else
             boollike=0;
+        $.ajax({
+            type: "get",
+            url:"./heartbreak?userid=${sessionScope.user.userid}&movieid=${sessionScope.moviedescription.movieid}&count="+99+"&star=0&time="+new Date().getTime()
+        })
         $.post("./likedmovie", {"movieid": "${sessionScope.moviedescription.movieid}","boollike":boollike,"userid":"${sessionScope.user.userid}"},function (data) {
             if(data=="success") {
                 if (boollike == 1)
@@ -584,24 +592,19 @@
 <!-- Heartbreak -->
 <script>
     $(document).ready(function() {
-        function Heartbreak()
+        var timesRun = 0;
+        var interval=setInterval(function()
         {
 
-            $.ajax({
-                type: "get",
-                url:"./heartbreak",
-                beforeSend: function (XMLHttpRequest) {
-                    XMLHttpRequest.setRequestHeader("X_UID", "${sessionScope.user.userid}");
-                    XMLHttpRequest.setRequestHeader("X_MID", "${sessionScope.moviedescription.movieid}");
-                },
-                success: function (data) {
-                    console.log(data);
-                },error:function(error){
-                    console.log(error);
-                }
-            })
-        }
-        setInterval(" Heartbreak","1000");
+            timesRun += 1;
+            if(timesRun === 10){
+                $.ajax({
+                    type: "get",
+                    url:"./heartbreak?userid=${sessionScope.user.userid}&movieid=${sessionScope.moviedescription.movieid}&count="+timesRun+"&star=0&time="+new Date().getTime()
+                })
+                clearInterval(interval);
+            }
+        },"2000");
     });
 
 </script>

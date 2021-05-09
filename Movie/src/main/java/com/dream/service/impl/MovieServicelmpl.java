@@ -6,6 +6,7 @@ import com.dream.mapper.MovieMapper;
 import com.dream.mapper.SimilartabMapper;
 import com.dream.po.*;
 import com.dream.service.MovieService;
+import com.dream.service.TopDefaultMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +21,8 @@ public class MovieServicelmpl implements MovieService {
     private SimilartabMapper similartabMapper;
     @Autowired
     private BrowseMapper browseMapper;
+    @Autowired
+    private TopDefaultMoviesService topDefaultMoviesService;
 
     @Override
     public E3Result SelectTopDefaultMovie(int limit) {

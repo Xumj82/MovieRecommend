@@ -26,9 +26,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * Created by ZXL on 2018/3/1.
- */
 
 @Controller
 public class IndexController {
@@ -58,12 +55,6 @@ public class IndexController {
         {
             List<Movie> movies = new ArrayList<Movie>();
 
-            // 从ALS表中查询推荐强度8以上的电影
-            List<Movie> alsMovies = alsService.selectAlsMoviesByUserId(user.getUserid());
-            for (Movie alsMovie : alsMovies) {
-                movies.add(alsMovie);
-            }
-
             Rectab rectab = rectabService.getRectabByUserId(user.getUserid());
             if (rectab!=null && null != rectab.getMovieids()) {
                 String movieids =rectab.getMovieids();
@@ -75,10 +66,18 @@ public class IndexController {
                     Integer movieid = Integer.parseInt(strmovieid);
                     Movie movie = movieService.getMovieByMovieid(movieid);
                     if(movie !=null)
-                      movies.add(movie);
+                        movies.add(movie);
                     i++;
                 }
             }
+
+            // 从ALS表中查询推荐强度8以上的电影
+            List<Movie> alsMovies = alsService.selectAlsMoviesByUserId(user.getUserid());
+            for (Movie alsMovie : alsMovies) {
+                movies.add(alsMovie);
+            }
+
+
             //不足五部从默认电影中凑齐五部
             if(movies.size()<5)
             {
@@ -208,23 +207,23 @@ public class IndexController {
         int userid = Integer.parseInt(request.getParameter("userid"));
         int movieid = Integer.parseInt(request.getParameter("movieid"));
         Double star = Double.parseDouble(request.getParameter("star"));
-        if(star>=3.5) {
-
-            // 查询本地相似表
-            String movieds = movieService.Select5SimilarMovies(movieid);
-            // 判断数据库是否有该userid
-            Rectab rectab = rectabService.getRectabByUserId(userid);
-            Rectab rec = new Rectab();
-            rec.setUserid(userid);
-            rec.setMovieids(movieds);
-            // 没有则插入数据库
-            if (null == rectab) {
-                rectabService.insert(rec);
-            } else {
-                rectabService.update(rec);
-            }
-
-        }
+//        if(star>=3.5) {
+//
+//            // 查询本地相似表
+//            String movieds = movieService.Select5SimilarMovies(movieid);
+//            // 判断数据库是否有该userid
+//            Rectab rectab = rectabService.getRectabByUserId(userid);
+//            Rectab rec = new Rectab();
+//            rec.setUserid(userid);
+//            rec.setMovieids(movieds);
+//            // 没有则插入数据库
+//            if (null == rectab) {
+//                rectabService.insert(rec);
+//            } else {
+//                rectabService.update(rec);
+//            }
+//
+//        }
         String str = request.getParameter("time");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date time = format.parse(str);

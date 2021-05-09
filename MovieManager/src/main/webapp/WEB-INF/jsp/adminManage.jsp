@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lu
-  Date: 18-3-9
-  Time: 上午10:11
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
@@ -26,7 +20,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>梦的6次方</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +64,7 @@
                     class="icon-bar"></span>
             </button>
             
-            <a class="navbar-brand" href="list.action">电影后台管理系统</a>
+            <a class="navbar-brand" href="list.action">Movie backend management system</a>
         </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -81,7 +74,7 @@
                 </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="../logout"><i class="fa fa-sign-out fa-fw"></i>
-                            退出登录</a></li>
+                            Logout</a></li>
                     </ul> <!-- /.dropdown-user --></li>
                 <!-- /.dropdown -->
             </ul>
@@ -90,12 +83,12 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li><a href="../movie/list" class="active"><i
-                            class="fa fa-edit fa-fw"></i> 电影管理</a></li>
+                            class="fa fa-edit fa-fw"></i> Movie management</a></li>
                     <li><a href="../user/list"><i
-                            class="fa fa-edit fa-fw"></i> 用户管理</a></li>
+                            class="fa fa-edit fa-fw"></i> User managment</a></li>
                 <shiro:hasRole name="admin">
                     <li><a href="list.action"><i
-                        class="fa fa-edit fa-fw"></i> 管理员管理</a></li>
+                        class="fa fa-edit fa-fw"></i> Admin</a></li>
                 </shiro:hasRole>
                 </ul>
             </div>
@@ -105,7 +98,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">管理员管理</h1>
+                    <h1 class="page-header">Admin</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -115,27 +108,27 @@
 
                     <form class="form-inline" action="${pageContext.request.contextPath }/admin/list.action" method="post">
                         <div class="form-group">
-                            <label for="adminname">用户名</label>
+                            <label for="adminname">Username</label>
                             <input type="text" class="form-control" id="adminname" value="${ adminname }" name="adminname">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">查询</button>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#adminAddDialog" >添加管理员</a>
+                        <button type="submit" class="btn btn-primary">seach</button>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#adminAddDialog" >Add admin</a>
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">管理员管理信息</div>
+                        <div class="panel-heading">Admin info</div>
                         <!-- /.panel-heading -->
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>管理员Id</th>
-                                    <th>管理员名字</th>
-                                    <th>管理员密码</th>
-                                    <th>角色</th>
+                                    <th>Id</th>
+                                    <th>User name</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
                                 </tr>
                             </thead>
                             <tbody align="center">

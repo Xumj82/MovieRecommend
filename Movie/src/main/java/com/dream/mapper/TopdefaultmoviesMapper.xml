@@ -195,7 +195,7 @@
   </update>
 
   <select id="selectRegDefaultMovie" resultMap="BaseMovieResultMap">
-    SELECT  * FROM topdefaultmovies t,movie m WHERE t.movieid=m.movieid limit 10;
+    SELECT * FROM movie.movie order by RAND() limit 10;
   </select>
 
 </mapper>

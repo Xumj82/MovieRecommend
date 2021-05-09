@@ -16,7 +16,6 @@
     <script src="./assets/js/star-rating.min.js" type="text/javascript"></script>
     <script src="./assets/js/jquery.js" type="text/javascript"></script>
 
-    <title>梦的6次方</title>
 </head>
 <body>
 
@@ -24,18 +23,18 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <form class="form-horizontal" id="logForm_mod">
-                <span class="heading">管理员登录</span>
+                <span class="heading">Admin login</span>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="loginAdminname" placeholder="账号" name="adminname">
+                    <input type="text" class="form-control" id="loginAdminname" placeholder="Account" name="adminname">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="form-group help">
-                    <input type="password" class="form-control" id="loginAdminpassword" placeholder="密　码" name="adminpassword">
+                    <input type="password" class="form-control" id="loginAdminpassword" placeholder="Password" name="adminpassword">
                     <i class="fa fa-lock"></i>
                     <a href="#" class="fa fa-question-circle"></a>
                 </div>
                 <div class="form-group">
-                    <button  id="login" type="button" class="btn btn-default" onclick="ADMINLOGIN.login()">登录</button>
+                    <button  id="login" type="button" class="btn btn-default" onclick="ADMINLOGIN.login()">Login</button>
                 </div>
             </form>
         </div>
@@ -47,11 +46,11 @@
         checkInput:function() {
 
             if(!$("#loginAdminname").val()) {
-                alert("请输入账号！");
+                alert("Please input account！");
                 return false;
             }
             if(!$("#loginAdminpassword").val()) {
-                alert("请输入密码！");
+                alert("Please input password！");
                 return false;
             }
             return true;
@@ -59,10 +58,10 @@
         doLogin:function() {
             $.post("./login", $("#logForm_mod").serialize(),function(data){
                 if (data.status == 200) {
-                    alert("登录成功！");
+                    alert("Success！");
                     location.href="./movie";
                 } else {
-                    alert("登录失败，原因是：" + data.msg);
+                    alert("Failed：" + data.msg);
                 }
             });
         },
