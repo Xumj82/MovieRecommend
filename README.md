@@ -39,11 +39,11 @@ In the movie website system, the user's click events (such as which movie the us
 
 ## SECTION 5 : USER GUIDE
 
-### Requirements
+### Guide
 
 1.Install docker 20.10.5 in your computer.
 
-2.Download and unzip 
+2.Download and unzip https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
 
 [dockerMovieRec.zip]: https://drive.google.com/file/d/1Ea7m0OX-maSqXCy68snby8yOhODitCdM/view?usp=sharing
 
@@ -61,14 +61,19 @@ All dataset and models are integrated with docker images
 
 
 
-### Model Checkpoint and data set
+### Crawler guide
 
-Download model_checkpoint from 
-Put it in to project code root directory. 
+This Crawler is using to update Movie image url. Can define to update or insert any data by yourself.
 
-Download project dataset from.
+1.Install Scrapyd and Scrapy 
 
-### Guide
+2.CD to Crawler/tutorial, then run command "scrapyd" to start scrapy server
+
+3.Open http://localhost:6800/ can show Scrap page.
+
+4.Open another terminal and run command "curl http://localhost:6800/schedule.json -d project=default -d spider=demo" to start crawler
+
+
 
 
 
