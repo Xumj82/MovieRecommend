@@ -49,13 +49,15 @@ In the movie website system, the user's click events (such as which movie the us
 
 
 
- in C:\temp (create if not existing) on Windows10  or copy into \temp on Linux
+ into current work directory(\MovieRecommend)
 
 3.CD to \MovieRecommend, then run command "docker compose up -d"
 
 4.Open localhost:85/movie/
 
 All dataset and models are integrated with docker images
+
+
 
 
 
