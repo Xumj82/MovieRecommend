@@ -156,6 +156,7 @@
 
         var m=JSON.parse('${sessionScope.TopDefaultMovieMap}');
         var movieid=$("a[name='movienametag']").attr("value");
+        var index = m[movieid];
         if(m[movieid]==0)
         {
             var url="${sessionScope.TopDefaultMovie[4].backpost}";
@@ -238,6 +239,8 @@
     $('#next').click(function(){
         var m=JSON.parse('${sessionScope.TopDefaultMovieMap}');
         var movieid=$("a[name='movienametag']").attr("value");
+        var index = m[movieid];
+
         if(m[movieid]==0)
         {
             var url="${sessionScope.TopDefaultMovie[1].backpost}";

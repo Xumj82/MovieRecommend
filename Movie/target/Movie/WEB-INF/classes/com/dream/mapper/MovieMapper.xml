@@ -341,7 +341,7 @@
     </if>
   </select>
   <select id="SelectTopDefaultMovie" resultMap="BaseResultMap">
-       SELECT * FROM movie order by RAND() limit #{limit};
+       SELECT * FROM movie where averating >3  order by RAND() limit #{limit};
   </select>
   <select id="selectByNameLike" resultMap="BaseResultMap" parameterType="java.lang.String">
     select

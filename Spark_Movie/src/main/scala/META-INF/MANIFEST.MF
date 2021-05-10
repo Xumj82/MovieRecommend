@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: com.cloud.datacleaner.RatingETL
+Main-Class: com.cloud.datacleaner.RatingDataSQL
 Class-Path: jasper-runtime-5.5.23.jar jcip-annotations-1.0-1.jar hadoop-
  mapreduce-client-core-2.6.0.jar calcite-linq4j-1.2.0-incubating.jar jsp
  -2.1-6.1.14.jar metrics-core-3.1.2.jar parquet-hadoop-1.7.0.jar spark-s

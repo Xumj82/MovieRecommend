@@ -195,7 +195,7 @@
   </update>
 
   <select id="selectRegDefaultMovie" resultMap="BaseMovieResultMap">
-    SELECT * FROM movie.movie order by RAND() limit 10;
+    SELECT * FROM movie.movie where averating >3 order by RAND() limit 10;
   </select>
 
 </mapper>

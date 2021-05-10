@@ -18,12 +18,14 @@ object RatingDataSQL {
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
     val hc = new HiveContext(sc)
-
+    import sqlContext.implicits._
     // RDD[UserRating]需要从原始表中提取userid,movieid,rating数据
     // 并把这些数据切分成训练集和测试集数据
     // 调用cache table tableName即可将一张表缓存到内存中，来极大的提高查询效率
     val ratings =sc.parallelize(getAllReviews())
-    //ratings.write.mode(SaveMode.Overwrite).parquet("/tmp/ratings")
+    ratings.toDF().show(20)
+
+    ratings.toDF().write.mode(SaveMode.Overwrite).parquet("/tmp/ratings")
     hc.sql("drop table if exists ratings")
     hc.sql("create table if not exists ratings(userId int,movieId int,rating double,timestamp int) stored as parquet")
     hc.sql("load data inpath '/tmp/ratings' overwrite into table ratings")
@@ -38,6 +40,7 @@ object RatingDataSQL {
     // order by limit的时候，需要注意OOM(Out Of Memory)的问题
     // 将数据按时间升序排序
     val trainingDataAsc = hc.sql(s"select userId,movieId,rating from ratings order by timestamp asc")
+    trainingDataAsc.show()
     trainingDataAsc.write.mode(SaveMode.Overwrite).parquet("/tmp/trainingDataAsc")
     hc.sql("drop table if exists trainingDataAsc")
     hc.sql("create table if not exists trainingDataAsc(userId int,movieId int,rating double) stored as parquet")
@@ -64,15 +67,6 @@ object RatingDataSQL {
     hc.sql("create table if not exists testData(userId int,movieId int,rating double) stored as parquet")
     hc.sql("load data inpath '/tmp/testData' overwrite into table testData")
 
-    // val ratingRDD = hc.sql("select * from trainingData").rdd.map(x => UserRating(x.getInt(0),x.getInt(1),x.getDouble(2)))
-
-    // 测试构造模型
-    // ratingRDD：数据集
-    // rank：对应的是隐因子的个数，这个值设置越高越准，但是也会产生更多的计算量。一般将这个值设置为10-200
-    //      隐因子：如一部电影，决定它评分的有导演、主演、特效和剧本4个隐因子
-    // iterations：对应迭代次数，一般设置个10就够了；
-    // lambda：该参数控制正则化过程，其值越高，正则化程度就越深。一般设置为0.01
-    // val model = ALS.train(ratingRDD, 1, 10, 0.01)
   }
 
   def getAllReviews(): Array[Ratings] = {
@@ -81,9 +75,10 @@ object RatingDataSQL {
     try {
       connection = DBUtils.getConnection()
       val statement = connection.createStatement()
-      val resultSet = statement.executeQuery("SELECT userid,movieid,star,UNIX_TIMESTAMP(reviewtime) FROM review;")
+      val resultSet = statement.executeQuery("SELECT userid,movieid,star,UNIX_TIMESTAMP(reviewtime) as time FROM movie.review;")
       while (resultSet.next()) {
-        ratings += resultSet
+        val rating = Ratings(resultSet.getInt("userid"),resultSet.getInt("movieid"),resultSet.getInt("star"),resultSet.getInt("time"))
+        ratings += rating
       }
     } catch {
       case e => e.printStackTrace

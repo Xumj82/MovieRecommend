@@ -2,11 +2,9 @@ package com.dream.controller;
 import com.dream.common.E3Result;
 import com.dream.po.Browse;
 import com.dream.po.Movie;
+import com.dream.po.Rectab;
 import com.dream.po.User;
-import com.dream.service.LoginService;
-import com.dream.service.RegisterService;
-import com.dream.service.TopDefaultMoviesService;
-import com.dream.service.UserService;
+import com.dream.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +31,8 @@ public class CustomerController {
     @Autowired
     private TopDefaultMoviesService topDefaultMoviesService;
 
+    @Autowired
+    private com.dream.service.RectabService rectabService;
     //进入注册页面
     @RequestMapping("/page/register")
     public String reg(HttpServletRequest request) {
@@ -121,6 +121,12 @@ public class CustomerController {
     @RequestMapping("/page/logout")
     public String pagelogout( HttpServletRequest request){
         //注销seesion
+        User user=(User) request.getSession().getAttribute("user");
+        Rectab rectab = rectabService.getRectabByUserId(user.getUserid());
+        if(rectab!= null){
+            rectab.setMovieids("");
+            rectabService.update(rectab);
+        }
         request.getSession().removeAttribute("user");
         request.getSession().removeAttribute("userId");
         request.getSession().removeAttribute("userstar");

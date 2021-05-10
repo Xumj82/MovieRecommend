@@ -361,14 +361,16 @@
             boollike=1;
         else
             boollike=0;
-        $.ajax({
-            type: "get",
-            url:"./heartbreak?userid=${sessionScope.user.userid}&movieid=${sessionScope.moviedescription.movieid}&count="+99+"&star=0&time="+new Date().getTime()
-        })
+
         $.post("./likedmovie", {"movieid": "${sessionScope.moviedescription.movieid}","boollike":boollike,"userid":"${sessionScope.user.userid}"},function (data) {
             if(data=="success") {
-                if (boollike == 1)
+                if (boollike == 1){
+                    $.ajax({
+                        type: "get",
+                        url:"./heartbreak?userid=${sessionScope.user.userid}&movieid=${sessionScope.moviedescription.movieid}&count="+99+"&star=0&time="+new Date().getTime()
+                    })
                     alert("success");
+                }
                 else
                     alert("Unfavorite");
             }

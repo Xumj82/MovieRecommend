@@ -45,6 +45,7 @@ public class IndexController {
     private BrowseService browseService;
     @Autowired
     private RectabService rectabService;
+
     //主页Home
     @RequestMapping("/")
     public String showHomepage( HttpServletRequest request){
@@ -56,7 +57,7 @@ public class IndexController {
             List<Movie> movies = new ArrayList<Movie>();
 
             Rectab rectab = rectabService.getRectabByUserId(user.getUserid());
-            if (rectab!=null && null != rectab.getMovieids()) {
+            if (rectab!=null && null != rectab.getMovieids() && !rectab.getMovieids().equals("")) {
                 String movieids =rectab.getMovieids();
                 String[] strmovieids = movieids.split(",");
                 int i = 0;
@@ -78,7 +79,7 @@ public class IndexController {
             }
 
 
-            //不足五部从默认电影中凑齐五部
+            //不足五部随机挑选5部
             if(movies.size()<5)
             {
                 E3Result TopDefaultMovie = movieService.SelectTopDefaultMovie(5-movies.size());
@@ -112,7 +113,62 @@ public class IndexController {
     //选电影界面
     @RequestMapping("/index")
     public String showIndex( HttpServletRequest request){
+        User user=(User) request.getSession().getAttribute("user");
         //获取所有分类标签
+        if(user!=null)
+        {
+            List<Movie> movies = new ArrayList<Movie>();
+
+            Rectab rectab = rectabService.getRectabByUserId(user.getUserid());
+            if (rectab!=null && null != rectab.getMovieids() && !rectab.getMovieids().equals("")) {
+                String movieids =rectab.getMovieids();
+                String[] strmovieids = movieids.split(",");
+                int i = 0;
+                for (String strmovieid: strmovieids) {
+                    if(i==5)
+                        break;
+                    Integer movieid = Integer.parseInt(strmovieid);
+                    Movie movie = movieService.getMovieByMovieid(movieid);
+                    if(movie !=null)
+                        movies.add(movie);
+                    i++;
+                }
+            }
+
+            // 从ALS表中查询推荐强度8以上的电影
+            List<Movie> alsMovies = alsService.selectAlsMoviesByUserId(user.getUserid());
+            for (Movie alsMovie : alsMovies) {
+                movies.add(alsMovie);
+            }
+
+
+            //不足五部随机挑选5部
+            if(movies.size()<5)
+            {
+                E3Result TopDefaultMovie = movieService.SelectTopDefaultMovie(5-movies.size());
+                List<Movie> temp = (List<Movie>)TopDefaultMovie.getData();
+                movies.addAll(temp);
+
+            }
+            //将电影信息放在map中转Json再进入session给前端 map中存放movieid
+            request.getSession().setAttribute("TopDefaultMovie",movies);
+            Map moviemap = new HashMap();
+            for(int i = 0 ; i < movies.size() ; i++) {
+                moviemap.put(movies.get(i).getMovieid().toString(), i);
+            }
+            request.getSession().setAttribute("TopDefaultMovieMap",JsonUtils.objectToJson(moviemap));
+        }
+        else
+        {
+            E3Result TopDefaultMovie = movieService.SelectTopDefaultMovie(5);
+            List<Movie> list = (List<Movie>)TopDefaultMovie.getData();
+            request.getSession().setAttribute("TopDefaultMovie",list);
+            Map moviemap = new HashMap();
+            for(int i = 0 ; i < list.size() ; i++) {
+                moviemap.put(list.get(i).getMovieid().toString(), i);
+            }
+            request.getSession().setAttribute("TopDefaultMovieMap",JsonUtils.objectToJson(moviemap));
+        }
         E3Result e3ResultAllCategory = categoryService.GetAllCategory();
         List<Category> list1 = (List<Category>)e3ResultAllCategory.getData();
         //获取所有电影数据(缺少筛选，默认一次加载20个)
