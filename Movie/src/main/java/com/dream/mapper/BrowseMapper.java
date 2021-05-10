@@ -22,6 +22,7 @@ public interface BrowseMapper {
     List<Browse> selectByExample(BrowseExample example);
 
     Browse selectByPrimaryKey(Integer browseid);
+    Browse selectByUserid(Integer userid);
 
     int updateByExampleSelective(@Param("record") Browse record, @Param("example") BrowseExample example);
 

@@ -88,6 +88,12 @@
     from browse
     where browseid = #{browseid,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from browse
+    where browseid = #{userid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from browse
     where browseid = #{browseid,jdbcType=INTEGER}
@@ -186,7 +192,6 @@
     </set>
     where browseid = #{browseid,jdbcType=INTEGER}
   </update>
-
   <insert id="insertuserfavourtemovie" parameterType="com.dream.po.Selectquery">
     <if test="molimit==1">
       update browse set movieids=concat(movieids,#{sort}) where userid =#{category};

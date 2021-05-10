@@ -25,6 +25,7 @@ import java.lang.String;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Controller
@@ -69,6 +70,24 @@ public class IndexController {
                     if(movie !=null)
                         movies.add(movie);
                     i++;
+                }
+            }else{
+               Browse browse = browseService.getBrowseByUserId(user.getUserid());
+               String[]  mvs = browse.getmovieids().replace(".","").split(",");
+               Integer i = 0;
+                for (String mv:mvs) {
+                    if(!mv.equals("")&&mv!=null){
+                        String t = movieService.Select5SimilarMovies(Integer.parseInt(mv));
+                        String[] mvids=movieService.Select5SimilarMovies(Integer.parseInt(mv)).split(",");
+                        int randomNum = ThreadLocalRandom.current().nextInt(0, mvids.length);
+                        String mvid = mvids[randomNum];
+                        if(!mvid.equals("")){
+                            movies.add(movieService.getMovieByMovieid(Integer.parseInt(mvid)));
+                        }
+                    }
+                    if(i++>5){
+                        break;
+                    };
                 }
             }
 

@@ -410,7 +410,7 @@
     <td>
     <a value="{id}" onclick='javascript:$.post("/Customer/Description",{id:$(this).attr("value")}, function (data) {
             if (data=="success") {
-                location.href = "/MovieDescription"
+                location.href = "./MovieDescription"
             } else {
             }
         })'>{moviename}</a></td>
