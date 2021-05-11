@@ -1,6 +1,6 @@
 ## SECTION 1 : PROJECT TITLE
 ## Movie recommendation System
-<img src="Miscellaneous/homepage.png"
+<img src="Miscellaneous/homepage2.png"
      style="float: left; margin-right: 0px;" />
 
 ---
