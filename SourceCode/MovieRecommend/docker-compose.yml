@@ -150,6 +150,7 @@ services:
       - -c 
       - |
         service ssh start
+        /usr/local/hadoop-2.6.4/bin/hadoop namenode -format
         /usr/local/hadoop-2.6.4/sbin/start-all.sh
         /usr/local/spark-1.6.2-bin-hadoop2.6/sbin/start-all.sh
         /usr/local/apache-hive-1.2.1-bin/bin/hive --service metastore -p 9083
