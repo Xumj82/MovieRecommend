@@ -33,7 +33,7 @@ In the movie website system, the user's click events (such as which movie the us
 
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
-[![Movie Recommendation System](Miscellaneous/yotube.png)](https://www.youtube.com/watch?v=80SMn2rojig)
+[![Movie Recommendation System](Miscellaneous/youtube.png)](https://www.youtube.com/watch?v=80SMn2rojig)
 
 ---
 
