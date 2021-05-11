@@ -26,8 +26,8 @@ In the movie website system, the user's click events (such as which movie the us
 
 | Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
 | :------------ |:---------------:| :-----| :-----|
-| Mingjie XU |  | MovieAdmin Web FE and BE design, Recommendation system design, data crawling, document writing| E@nus.edu.sg |
-| Chengyuan Sun | A0180523M | Movie Web FE and BE design,Model build and traing, paper,data crawling, document writing| E0284009@u.nus.edu |
+| Mingjie XU | A0186860U | Web FE and BE design, Recommendation system design, Service deployment, document writing| E0321098@u.nus.edu |
+| Chengyuan Sun | A0180523M | ItemCF Model ans ALS model build and traing, data crawling, document writing| E0284009@u.nus.edu |
 
 ---
 
