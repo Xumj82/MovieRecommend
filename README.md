@@ -1,5 +1,5 @@
 ## SECTION 1 : PROJECT TITLE
-## Music recommendation System
+## Movie recommendation System
 <img src="Miscellaneous/homepage.png"
      style="float: left; margin-right: 0px;" />
 
