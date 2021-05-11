@@ -4,8 +4,8 @@ services:
   mysql:
     image: mysql:5.7.31
     container_name: mysql
-    ports:
-      - "3301:3306"
+    #ports:
+      #- "3301:3306"
     networks:
         movierec:
             ipv4_address: 172.19.0.2
@@ -25,8 +25,8 @@ services:
       - mysql
     depends_on:
       - mysql
-    ports:
-      - "8888:8080"
+    #ports:
+      #- "8888:8080"
     networks:
         movierec:
             ipv4_address: 172.19.0.3
@@ -94,8 +94,8 @@ services:
     image: xumj1996docker/spark:v1
     container_name: spark2
     tty: true
-    ports:
-      - "28081:8081"
+    #ports:
+      #- "28081:8081"
     depends_on:
       - flume
     networks:
@@ -111,8 +111,8 @@ services:
     image: xumj1996docker/spark:v1
     container_name: spark3
     tty: true
-    ports:
-      - "38081:8081"
+    #ports:
+      #- "38081:8081"
     depends_on:
       - spark2
     networks:
@@ -128,9 +128,9 @@ services:
     image: xumj1996docker/spark:v1
     container_name: spark1
     tty: true
-    ports:
-      - "58080:8080"
-      - "54040:4040"
+    #ports:
+      #- "58080:8080"
+      #- "54040:4040"
     depends_on:
       - spark3
     networks:
