@@ -51,7 +51,7 @@ In the movie website system, the user's click events (such as which movie the us
 
  into current work directory(\MovieRecommend\SourceCode\MovieRecommend)
 
-3.CD to \MovieRecommend\SourceCode\MovieRecommend, then run command "docker compose up -d"
+3.CD to \MovieRecommend\SourceCode\MovieRecommend, then run command "docker compose up -d"(win10) or "sudo docker-compose up -d"(ubuntu)
 
 4.After start all container in docker, Open localhost:85/movie/
 
