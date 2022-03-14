@@ -6,7 +6,6 @@ import org.apache.spark.sql.SaveMode
 /**
   * 新用户没有观看记录
   * 默认推荐播放量前5的电影
-  * Created by ZXL on 2018/3/11.
   */
 object PopularMovies extends AppConf {
 
