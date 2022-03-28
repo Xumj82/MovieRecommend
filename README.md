@@ -51,12 +51,27 @@ In the movie website system, the user's click events (such as which movie the us
 
  into current work directory(\MovieRecommend\SourceCode\MovieRecommend)
 
-3.CD to \MovieRecommend\SourceCode\MovieRecommend, then run command "docker compose up -d"(win10) or "sudo docker-compose up -d"(ubuntu)
+3.CD to \MovieRecommend\SourceCode\MovieRecommend, then run command 
+Win10
+```
+docker compose up -d
+```
+Ubuntu:
+```
+"sudo docker-compose up -d
+```
+
 
 4.After start all container in docker, Open localhost:85/movie/
 
-5.Open terminal on your machine and key in command "docker exec -it spark1 bash",
-after connected with spark1, then type "nohup /usr/local/spark-1.6.2-bin-hadoop2.6/bin/spark-submit --class com.cloud.streaming.SparkDrStreamALS --jars /data/traintools/kafka-clients-0.8.2.0.jar,/data/traintools/metrics-core-2.2.0.jar,/data/traintools/kafka_2.10-0.8.2.1.jar,/data/traintools/spark-streaming-kafka_2.10-1.6.2.jar,lib/mysql-connector-java-5.1.49-bin.jar /data/traintools/SparkDrStreamALS.jar 1>/data/Log/task.log 2>&1 &"
+5.Attach in to master spark,
+```
+docker exec -it spark1 bash
+```
+6. After connected with spark1, then execute below to initilize recommend module
+```
+nohup /usr/local/spark-1.6.2-bin-hadoop2.6/bin/spark-submit --class com.cloud.streaming.SparkDrStreamALS --jars /data/traintools/kafka-clients-0.8.2.0.jar,/data/traintools/metrics-core-2.2.0.jar,/data/traintools/kafka_2.10-0.8.2.1.jar,/data/traintools/spark-streaming-kafka_2.10-1.6.2.jar,lib/mysql-connector-java-5.1.49-bin.jar /data/traintools/SparkDrStreamALS.jar 1>/data/Log/task.log 2>&1 &
+```
 then press enter and close terminal, now the spark will update recommend movies based on your browse histroy.
 
 All dataset and models are integrated with docker images
